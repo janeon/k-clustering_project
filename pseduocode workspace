@@ -3,3 +3,18 @@ process _input()
 find_centeroids()
 recenter()
 output_clusters()
+
+//k-means as Aidan understands it
+
+Create an iterable datastructure with comparable data points. (ex. a bunch (x,y) points into a linked list)
+Prompt the user for an integer n, the number of groups desired.
+
+Create n nodes with arbitrary values, and a 'group' field ( random (x,y), [] ). 
+While not done
+  For each data point, add the datapoint to the closest node's group
+  For each node, calculate the average values of all the points in it's group. (ex. average x and y values)
+  If the average value equals the node position for all nodes
+    Done is true
+  Else
+    Move the nodes to the new averaged position
+Return the current node grouping.
