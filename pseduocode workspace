@@ -1,3 +1,5 @@
 k-clustering
+process _input()
 find_centeroids()
 recenter()
+output_clusters()
