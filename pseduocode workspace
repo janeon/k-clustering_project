@@ -17,4 +17,5 @@ While not done
     Done is true
   Else
     Move the nodes to the new averaged position
+    Empty each nodes' group
 Return the current node grouping.
