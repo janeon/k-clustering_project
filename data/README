@@ -1,0 +1,10 @@
+Before running plot.py or generate.py, make sure you have matplot lib, and sklearn installed: 
+pip3 install sklearn 
+and etc
+
+To generate new cluster data, run generate.py
+To plot genrated cluster dat, run plot.py
+
+Both will prompt you for sample size (number of data points) and cluster number
+Generate will save a txt file of the name scheme: samplesize_cluster.txt
+
