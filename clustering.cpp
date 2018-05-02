@@ -7,7 +7,7 @@
 //============================================================================
 
 #include <iostream>
-
+#include <math.h>
 using namespace std;
 
 
@@ -26,7 +26,9 @@ public:
 	}
 
 	double distToPoint(Point dest) {
-
+        double a = sqrt((this->x*this->x)+(this->y*this->y));
+        double b = sqrt((dest->x*dest->x)+(dest->y*dest->y));
+        return (sqrt(a*a+b*b));
 		// calculate the distance between this point and dest, based on the pythagorean theorem
 	}
 
@@ -58,9 +60,7 @@ private:
 	int numPoints;
 
 public:
-
 	Cluster(Point center) {
-
 		this->center = center;
 	}
 
