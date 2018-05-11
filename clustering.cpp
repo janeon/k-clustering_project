@@ -8,39 +8,54 @@
 
 #include <iostream>
 #include <math.h>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 
 class Point {
 private:
 	double x;
 	double y;
-	string name;
 	Point *ClustCenter;
 
 public: // The class for a point and their methods
-	Point(double x, double y, string name) {
+	Point(double x, double y) {
 		this->x = x;
 		this->y = y;
-		this->name = name;
 	}
 
 	// calculate the distance between this point and dest, based on the pythagorean theorem
 	double distToPoint(Point dest) {
 		double a = sqrt((this->x * this->x) + (this->y * this->y));
 		double b = sqrt((dest.x * dest.x) + (dest.y * dest.y));
-		return (sqrt(a*a + b * b));
+		return (sqrt(a * a + b * b));
 	}
-	double getx() { return this->x; }
-	double gety() { return this->y; }
-	Point getClustCenter() { return *(this->ClustCenter); }
-	void setClustCenter(Point newCenter) { this->ClustCenter = &newCenter; }
+
+	double getx() { 
+		return this->x; 
+	}
+
+	double gety() { 
+		return this->y; 
+	}
+
+	// the corresponding center in which the point lies
+	Point getClustCenter() { 
+		return *(this->ClustCenter); 
+	}
+
+	void setClustCenter(Point newCenter) { 
+		this->ClustCenter = &newCenter; 
+	}
 };
 
 // Class for a determined cluster of points
 class Cluster {
 private:
 	Point * center;
-	int numPoints;
+	vector<Point> points;
+
 public:
 	Cluster(Point *ctr) {
 		this->center = ctr;
@@ -50,17 +65,28 @@ public:
 		return *(this->center);
 	}
 
-	int getNumPoints() {
-		return this->numPoints;
+	vector<Point> getPoints() {
+		return this->points;
 	}
+
+	int getNumPoints() {
+		return getPoints().size();
+	}
+
+	// add a point to the vector of points
+	void addPoint(Point newPoint) {
+		getPoints().push_back(newPoint);
+	}
+
+	// recenters the cluster, returns new center coordinate
 };
 
 
 class Map {
 private:
 	int totPoints;
-	Point *allPoints[0];
-	int allCenters[];
+	vector<Point> unsorted; // vector to hold all the points that don't have an assigned center yet 
+	vector<Point> allCenters; // vector to hold all the centers of clusters
 
 public:
 
@@ -72,18 +98,13 @@ public:
 		return this->totPoints;
 	}
 
-	Point * getAllPoints() {
-		return *(this->allPoints);
-	}
-
-	int * getAllCenters() {
-
-		return this->allCenters;
+	vector<Point> getUnsorted() {
+		return this->unsorted;
 	}
 
 	void addPoint(Point p) {
 
-		// add a point to the array of all points
+		// add a point to the unsorted vector
 	}
 
 	void addCenter(Point p) {
@@ -97,13 +118,15 @@ public:
 	}
 };
 
-
-class KM {
+// analysis methods
+class KMeans {
 private:
 	int k; // specified number of clusters
 	int limit; // the iteration limit of the algorithm
 	Point oldCenters[0]; // stores the previously calculated centers for comparison
-	int changed;
+	int changed; // whether or not the centers have changed - ending condition
+	Map map; 
+
 	void randCenters(int k) {
 
 		// initializes the map so that random k points are set as initial clusters
@@ -111,10 +134,17 @@ private:
 
 public:
 
-	KM(int k, int limit) {
+	KMeans(Map map, int k, int limit) {
 
+		if (k < 1) {
+			cout << "K must be a positive integer!" << endl;
+			exit(1);
+		}
+
+		this->map = map;
 		this->k = k;
 		this->limit = limit;
+		
 		randCenters(k);
 	}
 
@@ -137,10 +167,13 @@ public:
 
 
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	Point *origin = new Point(1, 2, "origin");
-	Point *pt = new Point(1, 2, "first point");
-	cout << "The point's x-coord is" << pt->getx() << endl;
+	
+	Map *map = new Map();
+	KMeans *km = new KMeans(*map, 1, 5);
+
+	Point *pt = new Point(0, 0);
+	Point *pt2 = new Point(1, 1);
+	cout << "The distance is " << pt->distToPoint(*pt2) << endl;
 	return 0;
 
 	// runs the algorithm
