@@ -12,18 +12,25 @@
 #include <tuple>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
 
 class Point {
 private:
-	Point *ClustCenter; // the corresponding center for the cluster in which the point lies
 	double x;
 	double y;
+	string name;
 public:
+	Point * ClustCenter; // the corresponding center for the cluster in which the point lies
 	
 	Point(double x, double y) {
 		this->x = x;
 		this->y = y;
+	}
+
+	string getName() {
+		return this->name;
 	}
 
 	double getx() {
@@ -35,18 +42,14 @@ public:
 	}
 
 	// calculate the distance between this point and dest, based on the pythagorean theorem
-	double distToPoint(Point dest) {
-		double a = sqrt((this->x * this->x) + (this->y * this->y));
-		double b = sqrt((dest.x * dest.x) + (dest.y * dest.y));
-		return (sqrt(a * a + b * b));
+	double distToPoint(Point *dest) {
+		double distx = (dest->x - this->x) * (dest->x - this->x);
+		double disty = (dest->y - this->y) * (dest->y - this->y);
+		return (sqrt(distx + disty));
 	}
 
-	Point getClustCenter() {
-		return *(this->ClustCenter);
-	}
-
-	void setClustCenter(Point newCenter) { 
-		this->ClustCenter = &newCenter; 
+	void setClustCenter(Point *newCenter) { 
+		this->ClustCenter = newCenter; 
 	}
 };
 
@@ -54,11 +57,11 @@ public:
 class Cluster {
 private:
 	Point * center;
-	vector<Point> points;
+	vector<Point*> points;
 
 public:
 	Cluster(Point *ctr) {
-		addPoint(*ctr);
+		addPoint(ctr);
 		this->center = ctr;
 	}
 
@@ -67,22 +70,22 @@ public:
 	}
 
 	// add a point to the vector of points
-	void addPoint(Point newPoint) {
+	void addPoint(Point *newPoint) {
 		points.push_back(newPoint);
 	}
 
 	// recenters the cluster, returns old center coordinate
-	tuple<double,double> recenter() {
+	tuple<double, double> recenter() {
 		// average of x and y 
 		double xavg, yavg = 0;
 		cout << numPoints() << endl;
 
 		// iterate and add coordinates
-		vector<Point>::iterator it;
-		for (it = points.begin(); it < points.end(); ++it) {
-			xavg += it->getx();
-			yavg += it->gety();
-		}
+		for (const auto& a : points) {
+			Point p = *a;
+			xavg += p.getx();
+			yavg += p.gety();
+		}                                                         
 
 		// divide by number of points for average value
 		xavg = xavg / numPoints();
@@ -93,31 +96,98 @@ public:
 	}
 };
 
-
+// how to use map:
+// first load in all the points with addPoint()
+// then make random centers with randCenters()
+// then assign all of them centers with sort()
 class Map {
+private:
+	vector<Point*> unsorted; // vector to hold all the points that don't have an assigned center yet 
+
+	// add a cluster with the given center
+	void addCluster(Point *newcenter) {
+		allCenters.push_back(newcenter);
+		new Cluster(newcenter);
+	}
+
+	// for initiation - assign k random centers
+	void randCenters(int k) {
+		// start with all points in unsorted
+		// choose k random ints out of the size of unsorted
+		// after each iteration, remove the point at the selected index from unsorted and add to allCenters
+		for (int i = 0; i < k; i++) {
+			srand(time(0)); // initialize rng
+			int r = rand() % unsorted.size(); // random int between 0 and size of unsorted (0 included)
+											  // get the selected item
+			Point *newcenter = unsorted.at(r);
+			addCluster(newcenter); // make a new cluster
+			unsorted.erase(unsorted.begin() + r); // erase the item from unsorted
+		}
+	}
+
+	// for intiation - put everything left in unsorted in clusters
+	void sort() {
+		// loop through unsorted until it is empty
+		while (!unsorted.empty()) {
+			Point *p = unsorted.at(0);
+			cout << "p is at " << p->getx() << "," << p->gety() << endl;
+			clusterize(p);
+			
+			unsorted.erase(unsorted.begin() + 0);
+		}
+	}
 public:
 
 	int totPoints;
-	vector<Point> unsorted; // vector to hold all the points that don't have an assigned center yet 
-	vector<Point> allCenters; // vector to hold all the centers of clusters
+	vector<Point*> allCenters; // vector to hold all the centers of clusters
 
 	Map() {
 		totPoints = 0;
 	}
 
+	// add in the beginning: add all points
+	void initiate(int k) {
+
+		randCenters(k);
+		sort();
+	}
+
+	// testing
+	void printcenters() {
+		for (const auto& c : allCenters) {
+			Point *cent = c;
+			cout << "A center is " << c->getx() << "," << c->gety() << endl;
+		}
+	}
+
 	// add a point to the unsorted vector
-	void addPoint(Point p) {
+	void addPoint(Point *p) {
 		unsorted.push_back(p);
+		totPoints++;
 	}
 
-	void addCenter(Point p) {
-
-		// add a center point to the array of all centers
+	// returns the distance between 2 points
+	double getDist(Point *a, Point *b) {
+		return a->distToPoint(b);
 	}
 
-	double getDist(Point a, Point b) {
-		return a.distToPoint(b);
-		// returns the distance between 2 points
+	// puts point in the cluster it belongs
+	void clusterize(Point *p) {
+		Point *mincent = allCenters.at(0); // center (in allCenters) that has the minimum distance to p - initialize
+		// iterate through allCenters
+		for (const auto& c : allCenters) {
+			Point *cent = c;
+			cout << "cent is at " << cent->getx() << "," << cent->gety() << "with distance " << getDist(p, cent) << endl;
+			if (getDist(p, cent) < getDist(p, mincent)) {
+				cout << "setting center to cent" << endl;
+				mincent = cent;
+			}
+		}
+		// put the point in the cluster and set the point's variables
+		p->setClustCenter(mincent);
+		mincent->ClustCenter = p;
+
+		cout << "The point " << p->getx() << "," << p->gety() << " has the center " << p->ClustCenter->getx() << "," << p->ClustCenter->gety() << endl;
 	}
 };
 
@@ -126,7 +196,7 @@ class KMeans {
 private:
 	int k; // specified number of clusters
 	int limit; // the iteration limit of the algorithm
-	Point oldCenters[0]; // stores the previously calculated centers for comparison
+	vector<Point*> oldCenters; // stores the previously calculated centers for comparison
 	int changed; // whether or not the centers have changed - ending condition
 	Map map; 
 
@@ -171,22 +241,34 @@ public:
 
 int main() {
 	
+	int k = 2;
+
 	Map *map = new Map();
-	KMeans *km = new KMeans(*map, 1, 5);
+	KMeans *km = new KMeans(*map, k, 5);
 
 	Point *a = new Point(0, 0);
 	Point *b = new Point(4, 4);
 	Point *c = new Point(0, 4);
 	Point *d = new Point(4, 0);
 
+	map->addPoint(a);
+	map->addPoint(b);
+	map->addPoint(c);
+	map->addPoint(d);
+ 
+	map->initiate(k);
+	map->printcenters();
+
+	/*
 	Cluster *cluster = new Cluster(a);
-	cluster->addPoint(*b);
-	cluster->addPoint(*c);
-	cluster->addPoint(*d);
+	cluster->addPoint(b);
+	cluster->addPoint(c);
+	cluster->addPoint(d);
 
 	// coordinates of new center
 	tuple<double, double> newCenter = cluster->recenter();
 	cout << "new center coordinate is " << get<0>(newCenter) << "," << get<1>(newCenter) << endl;
+	*/
 
 	return 0;
 
