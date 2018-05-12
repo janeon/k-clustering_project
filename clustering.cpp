@@ -9,17 +9,19 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <tuple>
 #include <stdio.h>
 #include <stdlib.h>
 using namespace std;
 
 class Point {
 private:
+	Point *ClustCenter; // the corresponding center for the cluster in which the point lies
+
+public:
 	double x;
 	double y;
-	Point *ClustCenter;
 
-public: // The class for a point and their methods
 	Point(double x, double y) {
 		this->x = x;
 		this->y = y;
@@ -32,17 +34,8 @@ public: // The class for a point and their methods
 		return (sqrt(a * a + b * b));
 	}
 
-	double getx() { 
-		return this->x; 
-	}
-
-	double gety() { 
-		return this->y; 
-	}
-
-	// the corresponding center in which the point lies
-	Point getClustCenter() { 
-		return *(this->ClustCenter); 
+	Point getClustCenter() {
+		return *(this->ClustCenter);
 	}
 
 	void setClustCenter(Point newCenter) { 
@@ -58,27 +51,39 @@ private:
 
 public:
 	Cluster(Point *ctr) {
+		addPoint(*ctr);
 		this->center = ctr;
 	}
 
-	Point getClustCenter() {
-		return *(this->center);
-	}
-
-	vector<Point> getPoints() {
-		return this->points;
-	}
-
-	int getNumPoints() {
-		return getPoints().size();
+	int numPoints() {
+		return points.size();
 	}
 
 	// add a point to the vector of points
 	void addPoint(Point newPoint) {
-		getPoints().push_back(newPoint);
+		points.push_back(newPoint);
 	}
 
-	// recenters the cluster, returns new center coordinate
+	// recenters the cluster, returns old center coordinate
+	tuple<double,double> recenter() {
+		// average of x and y 
+		double xavg, yavg = 0;
+		cout << numPoints() << endl;
+
+		// iterate and add coordinates
+		vector<Point>::iterator it;
+		for (it = points.begin(); it < points.end(); ++it) {
+			xavg += it->x;
+			yavg += it->y;
+		}
+
+		// divide by number of points for average value
+		xavg = xavg / numPoints();
+		yavg = yavg / numPoints();
+
+		// return tuple of coordinates
+		return make_tuple(xavg, yavg);
+	}
 };
 
 
@@ -171,9 +176,20 @@ int main() {
 	Map *map = new Map();
 	KMeans *km = new KMeans(*map, 1, 5);
 
-	Point *pt = new Point(0, 0);
-	Point *pt2 = new Point(1, 1);
-	cout << "The distance is " << pt->distToPoint(*pt2) << endl;
+	Point *a = new Point(0, 0);
+	Point *b = new Point(4, 4);
+	Point *c = new Point(0, 4);
+	Point *d = new Point(4, 0);
+
+	Cluster *cluster = new Cluster(a);
+	cluster->addPoint(*b);
+	cluster->addPoint(*c);
+	cluster->addPoint(*d);
+
+	// coordinates of new center
+	tuple<double, double> newCenter = cluster->recenter();
+	cout << "new center coordinate is " << get<0>(newCenter) << "," << get<1>(newCenter) << endl;
+
 	return 0;
 
 	// runs the algorithm
