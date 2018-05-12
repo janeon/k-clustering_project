@@ -17,14 +17,21 @@ using namespace std;
 class Point {
 private:
 	Point *ClustCenter; // the corresponding center for the cluster in which the point lies
-
-public:
 	double x;
 	double y;
-
+public:
+	
 	Point(double x, double y) {
 		this->x = x;
 		this->y = y;
+	}
+
+	double getx() {
+		return this->x;
+	}
+
+	double gety() {
+		return this->y;
 	}
 
 	// calculate the distance between this point and dest, based on the pythagorean theorem
@@ -73,8 +80,8 @@ public:
 		// iterate and add coordinates
 		vector<Point>::iterator it;
 		for (it = points.begin(); it < points.end(); ++it) {
-			xavg += it->x;
-			yavg += it->y;
+			xavg += it->getx();
+			yavg += it->gety();
 		}
 
 		// divide by number of points for average value
@@ -88,28 +95,19 @@ public:
 
 
 class Map {
-private:
+public:
+
 	int totPoints;
 	vector<Point> unsorted; // vector to hold all the points that don't have an assigned center yet 
 	vector<Point> allCenters; // vector to hold all the centers of clusters
-
-public:
 
 	Map() {
 		totPoints = 0;
 	}
 
-	int getTotPoints() {
-		return this->totPoints;
-	}
-
-	vector<Point> getUnsorted() {
-		return this->unsorted;
-	}
-
+	// add a point to the unsorted vector
 	void addPoint(Point p) {
-
-		// add a point to the unsorted vector
+		unsorted.push_back(p);
 	}
 
 	void addCenter(Point p) {
