@@ -9,7 +9,9 @@
 #include "clustering.h"
 #include <tuple>
 #include <string>
+#include <cmath>
 #include <iostream>
+#include  <fstream>
 using namespace std;
 
 class Point {
@@ -124,11 +126,12 @@ public:
 	}
 };
 
-// how to use map:
-// first load in all the points with addPoint()
-// then make random centers with randCenters()
-// then assign all of them centers with sort()
+
 class Map {
+    // how to use map:
+    // first load in all the points with addPoint()
+    // then make random centers with randCenters()
+    // then assign all of them centers with sort()
 private:
 	vector<Point*> allPoints; // vector of all points on map
 
@@ -209,7 +212,7 @@ public:
 	void printcenters() {
 		for (const auto& c : allClusters) {
 			Cluster *clust = c;
-			cout << "A center is at " << c->centerx << "," << c->centery << endl;
+            cout << "A center located at coordinate: " << c->centerx << "," << c->centery << endl;
 		}
 	}
 
@@ -255,8 +258,8 @@ public:
 	}
 };
 
-// analysis methods
 class KMeans {
+    // analysis methods
 private:
 	int k; // specified number of clusters
 	int limit; // the iteration limit of the algorithm
@@ -265,9 +268,15 @@ private:
 	Map *map; 
 
 	// add points
-	void populate() {
-
-		map->addPoint(new Point(0, 0));
+	void populate(string file) {
+        ifstream infile (file);
+        int a, b;
+        while (infile >> a >> b)  {
+            cout << "A data point: " << a << " " << b << endl;
+            map->addPoint(new Point(a,b));
+        }
+        /*
+        map->addPoint(new Point(0, 0));
 		map->addPoint(new Point(4, 4));
 		map->addPoint(new Point(0, 4));
 		map->addPoint(new Point(4, 0));
@@ -276,6 +285,11 @@ private:
 		map->addPoint(new Point(-2, 3.5));
 		map->addPoint(new Point(-5, -2));
 		map->addPoint(new Point(3, -10));
+        
+        map->addPoint(new Point(-2,4));
+        map->addPoint(new Point(-2,-4));
+        map->addPoint(new Point(-8,-9));
+        */
 	}
 
 	// initial clustering
@@ -290,14 +304,13 @@ private:
 	}
 
 public:
-
-	KMeans(Map *map, int k, int limit) {
+	KMeans(Map *map, int k, int limit, string file) {
 
 		if (k < 1) {
 			cout << "K must be a positive integer!" << endl;
 			exit(1);
 		}
-
+        
 		this->map = map;
 		this->k = k;
 		this->limit = limit;
@@ -305,14 +318,14 @@ public:
 
 		cout << "K = " << k << ", Iteration limit = " << limit << endl;
 		
-		populate(); // add all the points
+		populate(file); // add all the points
 		firstCluster(); // set random clusters and sort
 		doClustering(); // do the algorithm
+        printClusters(); // outputs the final clustering to an output file named: _______
 	}
 
 	// loop the algorithm until centers don't change or the limit is hit
 	void doClustering() {
-
 		int i = 0; // counter for limit
 		while (i < limit && changed == true) {
 			cout << "Iteration " << i+1 << endl;
@@ -320,22 +333,40 @@ public:
 			cout << "Changed:" << changed << endl;
 			i++;
 		}
-        if (!changed) cout << "Convergence not achieved by clustering limit has been reached." << endl;
-        // k-means actually actually converges to a finite number of steps (at most k^n) but for the sake of flexibility and efficiency we set an iteration limit
+        if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
+        else cout << "K-means has not converged but clustering limit has been reached" << endl;
 	}
+    
+    void printClusters() {
+        ofstream file ("new_clusters.txt"); // name original file will need to be inserted
+        if (file.is_open())  {
+            for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
+                    Cluster *clust = c;
+                file << "C:" << c->centerx << " " << c->centery << endl;
+            for (const auto&  point: c -> points) {
+                file << point->getx() << " " << point->gety() <<  endl;
+            }
+        }
+            file.close();
+            // for () // The points follow the line with the cluster center, with no prefixes
+    }
+        else cout << "The file was not opened" << endl;
+    }
 };
-
 
 
 int main() {
 	
 	int k = 4; // the number of clusters
-	int limit = 5; // the iteration limit
+    int limit = pow(4.0,9.0); // the iteration limit
+    // So k-means is supposed to converge in a finite number of steps
+    // (at most k^n) but as a sanity check that our program doesn't loop infinitely we set the iteration limit to k^n
 
 	Map *map = new Map();
-	KMeans *km = new KMeans(map, k, limit);
+	KMeans *km = new KMeans(map, k, limit, "test");
 
-	/*
+    
+    /*
 	Cluster *cluster = new Cluster(a);
 	cluster->addPoint(b);
 	cluster->addPoint(c);
