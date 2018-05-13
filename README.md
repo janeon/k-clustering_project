@@ -29,11 +29,17 @@ For RA:
 ```
 The minute value is 1/60 of the hour, and the second value is 1/60 of the minute. I'm thinking doing this to represent them as digits so the calculations work:
 ```
-4 + 5*1/60 + 38*1/3600
+4 + 5*1/60 + 38*1/3600 hours
 ```
 I think this would be the best way, unless there's a better one?
 
 The Dec is similar, but in degrees, arcminutes, and arcseconds. I think we can do the same thing; the two don't necessarily have to be in the same units, right?
+```
+48º 50' 2" becomes 48+50*1/60 + 2*1/3600 degrees 
+```
+60 arcmins in a degree, and 3600 arcsecs in a degree
+A source for conversion: http://www.skyandtelescope.com/astronomy-resources/what-are-celestial-coordinates/
+
 
 * Parse data files and load points. There are some good stars/galaxies catalogues online, for some of them you can filter out by the type of object, and then find some way to download them. In the Map/Kmeans class, make a method or something to load in the info and make Points.
 

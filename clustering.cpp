@@ -7,6 +7,9 @@
 //============================================================================
 
 #include "clustering.h"
+#include <tuple>
+#include <string>
+#include <iostream>
 using namespace std;
 
 class Point {
@@ -16,7 +19,7 @@ private:
 	string name;
 public:
 	bool clustered; // whether or not this point has a cluster yet
-	Cluster *clust; // the corresponding cluster
+	Cluster *clust; // the cluster this point belongs in
 
 	Point(double x, double y) {
 		this->x = x;
@@ -36,7 +39,7 @@ public:
 		return this->y;
 	}
 
-	// calculate the distance between this point and a coordinate, based on the pythagorean theorem
+	// calculate the distance between this point and another coordinate, based on the pythagorean theorem
 	double dist(double destx, double desty) {
 		double dx = (destx - this->x) * (destx - this->x);
 		double dy = (desty - this->y) * (desty - this->y);
@@ -90,7 +93,6 @@ public:
 		if (position != points.end()) {
 			points.erase(position);
 		}
-
 	}
 
 	// recenters the cluster, returns old center coordinate in tuple
@@ -137,7 +139,7 @@ private:
 
 	// puts point in the cluster it belongs
 	void clusterize(Point *p) {
-		// initialize nearest cluster
+		// initialize nearest cluster arbitrary at the first cluster center in the list
 		Cluster *nearest = allClusters.at(0);
 
 		// iterate through allCenters and compare distances
@@ -213,7 +215,6 @@ public:
 
 	// add in the beginning: add all points
 	void initiate(int k) {
-
 		randCenters(k);
 		printcenters();
 		sort();
@@ -232,6 +233,7 @@ public:
 		// loop through all the centers
 		for (const auto& c : allClusters) {
 			Cluster *clust = c;
+            // tuples store x, y coordinates of centers
 			tuple<double, double> oldcenter = clust->recenter();
 			tuple<double, double> newcenter = make_tuple(clust->centerx, clust->centery);
 			cout << "old center: " << get<0>(oldcenter) << "," << get<1>(oldcenter) << "; new center: " << get<0>(newcenter) << "," << get<1>(newcenter) << endl;
@@ -318,6 +320,8 @@ public:
 			cout << "Changed:" << changed << endl;
 			i++;
 		}
+        if (!changed) cout << "Convergence not achieved by clustering limit has been reached." << endl;
+        // k-means actually actually converges to a finite number of steps (at most k^n) but for the sake of flexibility and efficiency we set an iteration limit
 	}
 };
 
