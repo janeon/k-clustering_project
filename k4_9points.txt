@@ -1,0 +1,83 @@
+K = 4, Iteration limit = 5
+A center is at 5,0
+A center is at 7,10
+A center is at 4,0
+A center is at -5,-2
+The point 0,0 has the center 4,0
+The point 4,4 has the center 4,0
+The point 0,4 has the center 4,0
+The point 4,0 has the center 4,0
+The point 5,0 has the center 5,0
+The point 7,10 has the center 7,10
+The point -2,3.5 has the center -5,-2
+The point -5,-2 has the center -5,-2
+The point 3,-10 has the center 4,0
+Iteration 1
+reclustering
+old center: 5,0; new center: 5,0
+old center: 7,10; new center: 7,10
+old center: 4,0; new center: 2.2,-0.4
+center has changed.
+old center: -5,-2; new center: -3.5,0.75
+center has changed.
+centers have changed, re-sort.
+The point 0,0 has the center 2.2,-0.4
+successfully remove
+The point 4,4 has the center 5,0
+successfully remove
+The point 0,4 has the center -3.5,0.75
+successfully remove
+The point 4,0 has the center 5,0
+The point 5,0 has the center 5,0
+The point 7,10 has the center 7,10
+The point -2,3.5 has the center -3.5,0.75
+The point -5,-2 has the center -3.5,0.75
+The point 3,-10 has the center 2.2,-0.4
+Changed:1
+Iteration 2
+reclustering
+old center: 5,0; new center: 4.33333,1.33333
+center has changed.
+old center: 7,10; new center: 7,10
+old center: 2.2,-0.4; new center: 1.5,-5
+center has changed.
+old center: -3.5,0.75; new center: -2.33333,1.83333
+center has changed.
+centers have changed, re-sort.
+successfully remove
+The point 0,0 has the center -2.33333,1.83333
+The point 4,4 has the center 4.33333,1.33333
+The point 0,4 has the center -2.33333,1.83333
+The point 4,0 has the center 4.33333,1.33333
+The point 5,0 has the center 4.33333,1.33333
+The point 7,10 has the center 7,10
+The point -2,3.5 has the center -2.33333,1.83333
+The point -5,-2 has the center -2.33333,1.83333
+The point 3,-10 has the center 1.5,-5
+Changed:1
+Iteration 3
+reclustering
+old center: 4.33333,1.33333; new center: 4.33333,1.33333
+old center: 7,10; new center: 7,10
+old center: 1.5,-5; new center: 3,-10
+center has changed.
+old center: -2.33333,1.83333; new center: -1.75,1.375
+center has changed.
+centers have changed, re-sort.
+The point 0,0 has the center -1.75,1.375
+The point 4,4 has the center 4.33333,1.33333
+The point 0,4 has the center -1.75,1.375
+The point 4,0 has the center 4.33333,1.33333
+The point 5,0 has the center 4.33333,1.33333
+The point 7,10 has the center 7,10
+The point -2,3.5 has the center -1.75,1.375
+The point -5,-2 has the center -1.75,1.375
+The point 3,-10 has the center 3,-10
+Changed:1
+Iteration 4
+reclustering
+old center: 4.33333,1.33333; new center: 4.33333,1.33333
+old center: 7,10; new center: 7,10
+old center: 3,-10; new center: 3,-10
+old center: -1.75,1.375; new center: -1.75,1.375
+Changed:0

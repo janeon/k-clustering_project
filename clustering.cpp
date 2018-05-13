@@ -85,12 +85,10 @@ public:
 	// remove a point
 	void removePoint(Point *p) {
 		// find its position in points
-		cout << "asdf" << endl;
 		vector<Point*>::iterator position = find(points.begin(), points.end(), p);
 		
 		// erase if found
 		if (position != points.end()) {
-			cout << "found" << endl;
 			points.erase(position);
 		}
 
@@ -131,69 +129,11 @@ public:
 // then assign all of them centers with sort()
 class Map {
 private:
-	vector<Point*> unsorted; // vector to hold all the points that don't have an assigned center yet 
+	vector<Point*> allPoints; // vector of all points on map
 
 	// add a cluster with the given center
 	void addCluster(Point *newcenter) {
 		allClusters.push_back(new Cluster(newcenter->getx(), newcenter->gety()));
-	}
-
-	// for initiation - assign k random centers that are 
-	void randCenters(int k) {
-		// start with all points in unsorted
-		// choose k random ints out of the size of unsorted
-		// after each iteration, remove the point at the selected index from unsorted and add to allCenters
-		for (int i = 0; i < k; i++) {
-			srand(time(0)); // initialize rng
-			int r = rand() % unsorted.size(); // random int between 0 and size of unsorted (0 included)
-			// get the selected item
-			Point *newcenter = unsorted.at(r);
-			addCluster(newcenter); // make a new cluster
-			unsorted.erase(unsorted.begin() + r); // erase the item from unsorted
-		}
-	}
-
-	// for intiation - put everything left in unsorted in clusters
-	void sort() {
-		// loop through unsorted until it is empty
-		while (!unsorted.empty()) {
-			Point *p = unsorted.at(0);
-			cout << "clusterizing " << p->getx() << "," << p->gety() << endl;
-			clusterize(p);
-			
-			unsorted.erase(unsorted.begin() + 0);
-		}
-	}
-
-public:
-
-	int totPoints;
-	vector<Cluster*> allClusters; // vector to hold all the centers of clusters
-
-	Map() {
-		totPoints = 0;
-	}
-
-	//testing
-	void printcenters() {
-		for (const auto& c : allClusters) {
-			Cluster *clust = c;
-			cout << "A center is at " << c->centerx << "," << c->centery << endl;
-		}
-	}
-
-	// add in the beginning: add all points
-	void initiate(int k) {
-
-		randCenters(k);
-		printcenters();
-		sort();
-	}
-
-	// add a point to the unsorted vector
-	void addPoint(Point *p) {
-		unsorted.push_back(p);
-		totPoints++;
 	}
 
 	// puts point in the cluster it belongs
@@ -213,9 +153,9 @@ public:
 		// change things only if p's current cluster is not the nearest or the point did not have a cluster
 		if (p->clustered == false) {
 			nearest->addPoint(p);
-		} else if (p->clust->centerx != nearest->centerx && p->clust->centery != nearest->centery) {
+		}
+		else if (p->clust->centerx != nearest->centerx && p->clust->centery != nearest->centery) {
 
-			cout << "setting center to nearest" << endl;
 			// remove p from p's old cluster
 			p->clust->removePoint(p);
 			cout << "successfully remove" << endl;
@@ -225,6 +165,94 @@ public:
 
 		cout << "The point " << p->getx() << "," << p->gety() << " has the center " << p->clust->centerx << "," << p->clust->centery << endl;
 	}
+
+	// sort all points into clusters
+	void sort() {
+		for (const auto& point : allPoints) {
+			Point *p = point;
+			//cout << "clusterizing " << p->getx() << "," << p->gety() << endl;
+			clusterize(p);
+		}
+	}
+
+	// for initiation - assign k random centers that are 
+	void randCenters(int k) {
+		vector<Point*> centers; // store points that have already been selected
+		for (int i = 0; i < k; i++) {
+			srand(time(0)); // seed based on time for different randomness
+			int r = rand() % allPoints.size(); // random int between 0 and size of all (0 included)
+			Point *newcenter = allPoints.at(r); // get the selected item
+			// check if it is already a center
+			if (!centers.empty() && find(centers.begin(), centers.end(), newcenter) != centers.end()) { // if found
+				i--; // generate again
+			}
+			else {
+				// add point to centers
+				centers.push_back(newcenter);
+				addCluster(newcenter); // make a new cluster with the center coordinates
+			}
+		}
+		// deallocate vector
+		centers.clear();
+		vector<Point*>().swap(centers);
+	}                           
+
+public:
+
+	vector<Cluster*> allClusters; // vector to hold all the centers of clusters
+
+	Map() {
+		// add in all the points? add a method for this?
+	}
+
+	//testing
+	void printcenters() {
+		for (const auto& c : allClusters) {
+			Cluster *clust = c;
+			cout << "A center is at " << c->centerx << "," << c->centery << endl;
+		}
+	}
+
+	// add in the beginning: add all points
+	void initiate(int k) {
+
+		randCenters(k);
+		printcenters();
+		sort();
+	}
+
+	// add a point
+	void addPoint(Point *p) {
+		allPoints.push_back(p);
+	}
+
+	// reclusters based on new averaged centers of clusters, return whether the center has changed
+	bool recluster() {
+
+		bool changed = false; // initialize to unchanged centers
+
+		// loop through all the centers
+		for (const auto& c : allClusters) {
+			Cluster *clust = c;
+			tuple<double, double> oldcenter = clust->recenter();
+			tuple<double, double> newcenter = make_tuple(clust->centerx, clust->centery);
+			cout << "old center: " << get<0>(oldcenter) << "," << get<1>(oldcenter) << "; new center: " << get<0>(newcenter) << "," << get<1>(newcenter) << endl;
+
+			// if the coordinates are different, set changed to true
+			if (get<0>(oldcenter) != get<0>(newcenter) || get<1>(oldcenter) != get<1>(newcenter)) {
+				changed = true;
+				cout << "center has changed." << endl;
+			}
+		}
+
+		// reseort if changed
+		if (changed == true) {
+			cout << "centers have changed, re-sort." << endl;
+			sort();
+		}
+
+		return changed;
+	}
 };
 
 // analysis methods
@@ -233,29 +261,8 @@ private:
 	int k; // specified number of clusters
 	int limit; // the iteration limit of the algorithm
 	vector<Point*> oldCenters; // stores the previously calculated centers for comparison
-	int changed; // whether or not the centers have changed - ending condition
+	bool changed; // whether or not the centers have changed - ending condition
 	Map *map; 
-
-	void randCenters(int k) {
-
-		// initializes the map so that random k points are set as initial clusters
-	}
-
-public:
-
-	KMeans(Map *map, int k, int limit) {
-
-		if (k < 1) {
-			cout << "K must be a positive integer!" << endl;
-			exit(1);
-		}
-
-		this->map = map;
-		this->k = k;
-		this->limit = limit;
-		
-		randCenters(k);
-	}
 
 	// add points
 	void populate() {
@@ -276,14 +283,43 @@ public:
 		map->initiate(k);
 	}
 
-	Point * reCenter() {
-		return NULL;
-		// calculate new centers based on average coordinates of all points in each cluster
+	// calculate new centers based on average coordinates of all points in each cluster, resort points
+	bool recluster() {
+		cout << "reclustering" << endl;
+		return map->recluster();
 	}
 
-	int ifChanged() {
-		return changed; // remember to update changed as recenter is done
-		// return whether or not the centers have changed by comparing oldCenters[] and map->allCenters[]
+public:
+
+	KMeans(Map *map, int k, int limit) {
+
+		if (k < 1) {
+			cout << "K must be a positive integer!" << endl;
+			exit(1);
+		}
+
+		this->map = map;
+		this->k = k;
+		this->limit = limit;
+		changed = true;
+
+		cout << "K = " << k << ", Iteration limit = " << limit << endl;
+		
+		populate(); // add all the points
+		firstCluster(); // set random clusters and sort
+		doClustering(); // do the algorithm
+	}
+
+	// loop the algorithm until centers don't change or the limit is hit
+	void doClustering() {
+
+		int i = 0; // counter for limit
+		while (i < limit && changed == true) {
+			cout << "Iteration " << i+1 << endl;
+			changed = recluster();
+			cout << "Changed:" << changed << endl;
+			i++;
+		}
 	}
 };
 
@@ -291,14 +327,10 @@ public:
 
 int main() {
 	
-	int k = 2;
+	int k = 4;
 
 	Map *map = new Map();
 	KMeans *km = new KMeans(map, k, 5);
-
-	km->populate();
-	km->firstCluster();
-	
 
 	/*
 	Cluster *cluster = new Cluster(a);
