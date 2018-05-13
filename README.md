@@ -1,11 +1,13 @@
-# k-clustering_project
+# K-Means Clustering for Astronomical Objects
 Shana Li, Jane Hsieh, Aidan Kidder-Wolff
 
 ## Summary:
 A program that runs the k-means clustering algorithm on a collection of points in space (currently for x-y coordinates) and puts them in k clusters, each with a specified center. The program runs the k-means algorithm until the centers have been stabilized or until the maximum number of iterations has been reached.
 
 The k-means algorithm is as follows:
-<someone pls put a description here>
+```
+someone pls put a description here
+```
 
 While k-means clustering can be used for a multitude of purposes, our intention for this project is to determine clusters of stars and galaxies given their coordinates in the sky. Star and galaxy clustering are natural phenomena that has been investigated using numerous scientific tools and methods, but without astronomical instrumentation, means to measure any other physical quality of spacial objects, or years of knowledge in astronomy, k-means clustering is a computationally cheap, statistical way of obtaining this information to some degree of accuracy.
 
