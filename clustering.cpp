@@ -9,6 +9,7 @@
 #include "clustering.h"
 #include <tuple>
 #include <string>
+#include <sstream>
 #include <cmath>
 #include <iostream>
 #include  <fstream>
@@ -270,11 +271,19 @@ private:
 	// add points
 	void populate(string file) {
         ifstream infile (file);
-        int a, b;
-        while (infile >> a >> b)  {
-            cout << "A data point: " << a << " " << b << endl;
-            map->addPoint(new Point(a,b));
+        float x, y; string line;
+        while (getline(infile, line))  {
+            istringstream ln(line);
+            istream_iterator<string> start(ln), end;
+            vector<string> tokens(start,end);
+            cout << "Point located at: (" << tokens.at(0) << "," << tokens.at(1) <<  ")\n";
+            x = stof(tokens.at(0));
+            y = stof(tokens.at(1));
+            map->addPoint(new Point(x, y));
+            cout << "Point located at: (" << x << "," << y <<  ")\n";
         }
+        infile.close();
+        
         /*
         map->addPoint(new Point(0, 0));
 		map->addPoint(new Point(4, 4));
@@ -297,8 +306,9 @@ private:
 		map->initiate(k);
 	}
 
-	// calculate new centers based on average coordinates of all points in each cluster, resort points
+	
 	bool recluster() {
+        // calculate new centers based on average coordinates of all points in each cluster, resort points
 		cout << "reclustering" << endl;
 		return map->recluster();
 	}
@@ -321,7 +331,7 @@ public:
 		populate(file); // add all the points
 		firstCluster(); // set random clusters and sort
 		doClustering(); // do the algorithm
-        printClusters(); // outputs the final clustering to an output file named: _______
+        printClusters(file); // outputs the final clustering to an output file, which is named by the original file, followed by the postfix "centered"
 	}
 
 	// loop the algorithm until centers don't change or the limit is hit
@@ -337,17 +347,17 @@ public:
         else cout << "K-means has not converged but clustering limit has been reached" << endl;
 	}
     
-    void printClusters() {
-        ofstream file ("new_clusters.txt"); // name original file will need to be inserted
-        if (file.is_open())  {
+    void printClusters(string file) {
+        ofstream outfile(file+"_centered"); // name original file will need to be inserted
+        if (outfile.is_open())  {
             for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
                     Cluster *clust = c;
-                file << "C:" << c->centerx << " " << c->centery << endl;
+                outfile << "C:" << c->centerx << " " << c->centery << endl;
             for (const auto&  point: c -> points) {
-                file << point->getx() << " " << point->gety() <<  endl;
+                outfile << point->getx() << " " << point->gety() <<  endl;
             }
         }
-            file.close();
+            outfile.close();
             // for () // The points follow the line with the cluster center, with no prefixes
     }
         else cout << "The file was not opened" << endl;
