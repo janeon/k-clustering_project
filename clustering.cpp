@@ -371,9 +371,10 @@ int main() {
     int limit = pow(4.0,9.0); // the iteration limit
     // So k-means is supposed to converge in a finite number of steps
     // (at most k^n) but as a sanity check that our program doesn't loop infinitely we set the iteration limit to k^n
-
-	Map *map = new Map();
-	KMeans *km = new KMeans(map, k, limit, "test");
+    cout << "Enter the name of the file you'd like to perform k-means on: ";
+    string input; getline(cin, input);
+    Map *map = new Map();
+	KMeans *km = new KMeans(map, k, limit, input);
 
     
     /*
