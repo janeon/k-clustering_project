@@ -327,10 +327,11 @@ public:
 
 int main() {
 	
-	int k = 4;
+	int k = 4; // the number of clusters
+	int limit = 5; // the iteration limit
 
 	Map *map = new Map();
-	KMeans *km = new KMeans(map, k, 5);
+	KMeans *km = new KMeans(map, k, limit);
 
 	/*
 	Cluster *cluster = new Cluster(a);
