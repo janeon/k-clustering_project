@@ -1,0 +1,17 @@
+The set of galaxies we are extracting from the search are of the following types:
+  GiC    	Galaxy in Cluster of Galaxies
+  BiC    	Brightest galaxy in a Cluster (BCG)
+  GiG    	Galaxy in Group of Galaxies
+  GiP    	Galaxy in Pair of Galaxies
+  HzG    	Galaxy with high redshift
+  rG     	Radio Galaxy
+  H2G    	HII Galaxy
+  LSB    	Low Surface Brightness Galaxy
+  EmG    	Emission-line galaxy
+  SBG    	Starburst Galaxy
+  bCG    	Blue compact Galaxy
+  SyG    	Seyfert Galaxy
+  Sy1    	Seyfert 1 Galaxy
+  Sy2    	Seyfert 2 Galaxy
+The set of all object classifications can be found below
+http://simbad.u-strasbg.fr/simbad/sim-display?data=otypes
