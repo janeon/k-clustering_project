@@ -11,7 +11,7 @@ Procedure: The algorithm begins by randomly assigning k coordinates as centers f
 For the next iteration rounds, 
     The algorithm first assigns each point to one of the k cluster centers
     For each cluster, the average coordinate of points assigned to a center is calculated, this average becomes the new center
-    After calculating average centers, if coordinates of centers have not changed, then the iterations terminate, otherwise program continues to recenter its clusters   
+    After calculating average centers, if coordinates of centers have not changed or the iteration limit has been reached, then the iterations terminate, otherwise program continues to recenter its clusters 
 
 ```
 
