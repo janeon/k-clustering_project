@@ -6,7 +6,13 @@ A program that runs the k-means clustering algorithm on a collection of points i
 
 The k-means algorithm is as follows:
 ```
-someone pls put a description here
+Inputs: integer k indicating the number of desired centers and a set of points to be clustered
+Procedure: The algorithm begins by randomly assigning k coordinates as centers for the set.
+For the next iteration rounds, 
+    The algorithm first assigns each point to one of the k cluster centers
+    For each cluster, the average coordinate of points assigned to a center is calculated, this average becomes the new center
+    After calculating average centers, if coordinates of centers have not changed, then the iterations terminate, otherwise program continues to recenter its clusters   
+
 ```
 
 While k-means clustering can be used for a multitude of purposes, our intention for this project is to determine clusters of stars and galaxies given their coordinates in the sky. Star and galaxy clustering are natural phenomena that has been investigated using numerous scientific tools and methods, but without astronomical instrumentation, means to measure any other physical quality of spacial objects, or years of knowledge in astronomy, k-means clustering is a computationally cheap, statistical way of obtaining this information to some degree of accuracy.

@@ -15,7 +15,6 @@ private:
 	double y;
 	string name;
 public:
-
 	bool clustered; // whether or not this point has a cluster yet
 	Cluster *clust; // the corresponding cluster
 
@@ -155,7 +154,6 @@ private:
 			nearest->addPoint(p);
 		}
 		else if (p->clust->centerx != nearest->centerx && p->clust->centery != nearest->centery) {
-
 			// remove p from p's old cluster
 			p->clust->removePoint(p);
 			cout << "successfully remove" << endl;
