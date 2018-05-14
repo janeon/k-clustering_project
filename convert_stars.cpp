@@ -46,12 +46,17 @@ void convert(string (&array)[6]){
 
 int main(int argc, char** argv){
 	string line;
+	string delimiter = "|";
 	ifstream myfile;
 	myfile.open(argv[1]);
 	
 	/* Open file and read line by line  */
 	if (myfile.is_open()){
 		while (getline (myfile, line)){
+			/* Print name of galaxy */
+                        cout << line.substr(0, line.find(delimiter));
+                        line = line.substr(line.find(delimiter)+ 1, line.size());
+			
 			/* Convert line into an array */
 			string arr[6];
 			int i = 0;
