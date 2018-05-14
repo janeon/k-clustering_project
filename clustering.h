@@ -14,6 +14,12 @@
 #include <ctime>
 #include <cstdlib>
 #include <algorithm>
+#include <string>
+#include <sstream>
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <iterator>
 
 class Point;
 class Cluster;

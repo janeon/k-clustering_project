@@ -38,7 +38,8 @@ The Dec is similar, but in degrees, arcminutes, and arcseconds. I think we can d
 48º 50' 2" becomes 48+50*1/60 + 2*1/3600 degrees 
 ```
 60 arcmins in a degree, and 3600 arcsecs in a degree
-A source for conversion: http://www.skyandtelescope.com/astronomy-resources/what-are-celestial-coordinates/
+A source for conversion: 
+http://www.skyandtelescope.com/astronomy-resources/what-are-celestial-coordinates/
 
 
 * Parse data files and load points. There are some good stars/galaxies catalogues online, for some of them you can filter out by the type of object, and then find some way to download them. In the Map/Kmeans class, make a method or something to load in the info and make Points.
