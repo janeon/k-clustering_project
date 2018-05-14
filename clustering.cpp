@@ -1,4 +1,3 @@
-//============================================================================
 // Name        : star_clustering.cpp
 // Author      : Shana Li, Jane Hsieh, Aidan KW
 // Version     :
@@ -7,6 +6,7 @@
 //============================================================================
 
 #include "clustering.h"
+<<<<<<< HEAD
 #include <tuple>
 #include <string>
 #include <sstream>
