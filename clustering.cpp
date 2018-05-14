@@ -13,6 +13,8 @@
 #include <cmath>
 #include <iostream>
 #include  <fstream>
+#include <boost/lexical_cast.hpp>
+
 using namespace std;
 
 class Point {
@@ -277,6 +279,16 @@ private:
             istream_iterator<string> start(ln), end;
             vector<string> tokens(start,end);
             cout << "Point located at: (" << tokens.at(0) << "," << tokens.at(1) <<  ")\n";
+            using boost::lexical_cast;
+            using boost::bad_lexical_cast;
+            try {
+                boost::lexical_cast<float>(tokens.at(0));
+                boost::lexical_cast<float>(tokens.at(1));
+            }
+            catch (bad_lexical_cast &) {
+                cout << "Please only input files containing points separated by lines and where coordinates are separated by a space" <<  ")\n";
+                exit(1);
+            }
             x = stof(tokens.at(0));
             y = stof(tokens.at(1));
             map->addPoint(new Point(x, y));
