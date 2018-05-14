@@ -7,12 +7,6 @@
 //============================================================================
 
 #include "clustering.h"
-#include <tuple>
-#include <string>
-#include <sstream>
-#include <cmath>
-#include <iostream>
-#include  <fstream>
 using namespace std;
 
 class Point {
