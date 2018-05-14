@@ -6,7 +6,6 @@
 //============================================================================
 
 #include "clustering.h"
-<<<<<<< HEAD
 #include <tuple>
 #include <string>
 #include <sstream>
@@ -129,7 +128,6 @@ public:
 	}
 };
 
-
 class Map {
     // how to use map:
     // first load in all the points with addPoint()
@@ -208,7 +206,7 @@ public:
 	vector<Cluster*> allClusters; // vector to hold all the centers of clusters
 
 	Map() {
-		// add in all the points? add a method for this?
+		// add in all the points? add a method for this?  Populate currently does this?
 	}
 
 	//testing
@@ -327,12 +325,10 @@ private:
 
 public:
 	KMeans(Map *map, int k, int limit, string file) {
-
 		if (k < 1) {
 			cout << "K must be a positive integer!" << endl;
 			exit(1);
 		}
-        
 		this->map = map;
 		this->k = k;
 		this->limit = limit;
@@ -349,7 +345,7 @@ public:
 	// loop the algorithm until centers don't change or the limit is hit
 	void doClustering() {
 		int i = 0; // counter for limit
-		while (i < limit && changed == true) {
+		while (i < limit && changed) {
 			cout << "Iteration " << i+1 << endl;
 			changed = recluster();
 			cout << "Changed:" << changed << endl;

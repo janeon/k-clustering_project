@@ -2,18 +2,19 @@
 Shana Li, Jane Hsieh, Aidan Kidder-Wolff
 
 ## Summary:
-A program that runs the k-means clustering algorithm on a collection of points in space (currently for x-y coordinates) and puts them in k clusters, each with a specified center. The program runs the k-means algorithm until the centers have been stabilized or until the maximum number of iterations has been reached.
+A program that runs the k-means clustering algorithm on a collection of points in space (currently for x-y coordinates) and puts them in k clusters, each with a specified center. The program runs the reclusters and changes centroids until the centers have been stabilized or until the maximum number of iterations has been reached.
 
 The k-means algorithm is as follows:
 ```
 Inputs: integer k indicating the number of desired centers and a set of points to be clustered
-Procedure: The algorithm begins by randomly assigning k coordinates as centers for the set.
-While iteration count and convergence have not been reached, 
-    The algorithm first assigns each point to one of the k cluster centers
-    For each cluster, the average coordinate of points assigned to a center is calculated, this average becomes the new center
-    After calculating average centers:
-        if coordinates of centers have not changed or the iteration limit has been reached, the algorithm
-        otherwise program continues to recenter its clusters 
+Procedure: 
+The algorithm begins by randomly assigning k points from the input as initial centeroids
+While iteration count and convergence have not been reached: 
+    Each point is assigned to its closest centroid
+    For each cluster
+        Average coordinate all points in cluster is calculated and assigned to be the new centroid of this cluster
+    If coordinates of centroids have not changed or if the iteration limit has been reached, the loop terminates
+    Otherwise continue reclustering 
 
 ```
 
