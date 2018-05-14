@@ -12,6 +12,7 @@
 #include <cmath>
 #include <iostream>
 #include  <fstream>
+#include "gnuplot-iostream.h"
 //#include <boost/lexical_cast.hpp>
 
 using namespace std;
@@ -277,7 +278,8 @@ private:
             istream_iterator<string> start(ln), end;
             vector<string> tokens(start,end);
             cout << "Point located at: (" << tokens.at(tokens.size()-2) << "," << tokens.at(tokens.size()-1) <<  ")\n";
-            /* using boost::lexical_cast;
+            /* jk not using boost, assuming user is inputting files with right format
+             using boost::lexical_cast;
             using boost::bad_lexical_cast;
             try {
                 boost::lexical_cast<float>(tokens.at(tokens.size()-2));
@@ -354,6 +356,7 @@ public:
 		}
         if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
         else cout << "K-means has not converged but clustering limit has been reached" << endl;
+        cout << "Number of iterations: " << i << endl;
 	}
     
     void printClusters(string file) {
@@ -380,10 +383,14 @@ int main() {
     int limit = pow(4.0,9.0); // the iteration limit
     // So k-means is supposed to converge in a finite number of steps
     // (at most k^n) but as a sanity check that our program doesn't loop infinitely we set the iteration limit to k^n
+    cout << "Note: File format must contain two floats or integers at the end of each line indicating the coordintates of a point" << endl;
     cout << "Enter the name of the file you'd like to perform k-means on: ";
     string input; getline(cin, input);
+    cout << "Enter the number of desired centroids: ";
+    string strk;
+    getline(cin, strk);
     Map *map = new Map();
-	KMeans *km = new KMeans(map, k, limit, input);
+	KMeans *km = new KMeans(map, stoi(strk), limit, input);
 
     
     /*

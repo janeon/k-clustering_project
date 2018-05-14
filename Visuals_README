@@ -1,0 +1,11 @@
+What we have so far:
+A way to plot points in c++ files using gnuplot - see testgnu.cpp
+remember that all cpp files using the boost options
+The plots will save to postscript files (names are set manully so we can adjust to the appropriate name of the data set and iteration count)
+Note: postscript data can be seen with preview on macs and ghostscript on pcs
+
+
+What needs to be figured out
+How to plot not just from a file, but also from a vector of points (we can't afford to print out a file for each iteration)
+For each file, what are the max and min values for both axes (x and y)?
+Maybe create a animation of ps files using ghostscript
