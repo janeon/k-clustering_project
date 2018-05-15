@@ -12,7 +12,7 @@ The algorithm begins by randomly assigning k points from the input as initial ce
 While iteration count and convergence have not been reached: 
     Each point is assigned to its closest centroid
     For each cluster
-        Average coordinate all points in cluster is calculated and assigned to be the new centroid of this cluster
+        Average coordinate of all points in cluster is calculated and assigned to be the new centroid of this cluster
     If coordinates of centroids have not changed or if the iteration limit has been reached, the loop terminates
     Otherwise continue reclustering 
 
