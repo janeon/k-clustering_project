@@ -1,8 +1,8 @@
-Average distance for k=2: 11.856492
-Average distance for k=3: 7.505531
-Average distance for k=4: 4.440948
-Average distance for k=5: 3.646314
-Average distance for k=6: 2.433408
-Average distance for k=7: 1.977163
-Average distance for k=8: 1.901587
-Average distance for k=9: 1.565812
+Average distance for k=2 11.856492
+Average distance for k=3 7.505531
+Average distance for k=4 4.440948
+Average distance for k=5 3.646314
+Average distance for k=6 2.433408
+Average distance for k=7 1.977163
+Average distance for k=8 1.901587
+Average distance for k=9 1.565812
