@@ -4,7 +4,7 @@ Shana Li, Jane Hsieh, Aidan Kidder-Wolff
 ## Summary:
 A program that runs the k-means clustering algorithm on a collection of points in space (currently for x-y coordinates) and puts them in k clusters, each with a specified center. The program runs the reclusters and changes centroids until the centers have been stabilized or until the maximum number of iterations has been reached.
 
-The k-means algorithm is as follows:
+##Pseudocode of the k-means algorithm 
 ```
 Inputs: integer k indicating the number of desired centers and a set of points to be clustered
 Procedure: 
