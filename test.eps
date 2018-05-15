@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
-%%Title: hello.eps
+%%Title: test.eps
 %%Creator: gnuplot 5.2 patchlevel 3
-%%CreationDate: Tue May 15 02:35:57 2018
+%%CreationDate: Mon May 14 22:33:09 2018
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -478,12 +478,12 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (hello.eps)
+  /Title (test.eps)
   /Subject (gnuplot plot)
   /Creator (gnuplot 5.2 patchlevel 3)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Tue May 15 02:35:57 2018)
+  /CreationDate (Mon May 14 22:33:09 2018)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -527,206 +527,126 @@ doclip
 newpath
 (Helvetica) findfont 140 scalefont setfont
 BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
-/Helvetica findfont 140 scalefont setfont
-/vshift -46 def
-gsave % colour palette begin
-/maxcolors 0 def
-/HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
-  { /HSVs exch def /HSVv exch def 6.0 mul dup floor dup 3 1 roll sub
-     /HSVf exch def /HSVi exch cvi def /HSVp HSVv 1.0 HSVs sub mul def
-	 /HSVq HSVv 1.0 HSVs HSVf mul sub mul def 
-	 /HSVt HSVv 1.0 HSVs 1.0 HSVf sub mul sub mul def
-	 /HSVi HSVi 6 mod def 0 HSVi eq {HSVv HSVt HSVp}
-	 {1 HSVi eq {HSVq HSVv HSVp}{2 HSVi eq {HSVp HSVv HSVt}
-	 {3 HSVi eq {HSVp HSVq HSVv}{4 HSVi eq {HSVt HSVp HSVv}
-	 {HSVv HSVp HSVq} ifelse} ifelse} ifelse} ifelse} ifelse
-  } ifelse} def
-/Constrain {
-  dup 0 lt {0 exch pop}{dup 1 gt {1 exch pop} if} ifelse} def
-/CMY2RGB {  1 exch sub exch 1 exch sub 3 2 roll 1 exch sub 3 1 roll exch } def
-/XYZ2RGB {  3 copy -0.9017 mul exch -0.1187 mul add exch 0.0585 mul exch add
-  Constrain 4 1 roll 3 copy -0.0279 mul exch 1.999 mul add exch
-  -0.9844 mul add Constrain 5 1 roll -0.2891 mul exch -0.5338 mul add
-  exch 1.91 mul exch add Constrain 3 1 roll} def
-/SelectSpace {ColorSpace (HSV) eq {HSV2RGB}{ColorSpace (XYZ) eq {
-  XYZ2RGB}{ColorSpace (CMY) eq {CMY2RGB}{ColorSpace (YIQ) eq {YIQ2RGB}
-  if} ifelse} ifelse} ifelse} def
-/InterpolatedColor true def
-/grayindex {/gidx 0 def
-  {GrayA gidx get grayv ge {exit} if /gidx gidx 1 add def} loop} def
-/dgdx {grayv GrayA gidx get sub GrayA gidx 1 sub get
-  GrayA gidx get sub div} def 
-/redvalue {RedA gidx get RedA gidx 1 sub get
-  RedA gidx get sub dgdxval mul add} def
-/greenvalue {GreenA gidx get GreenA gidx 1 sub get
-  GreenA gidx get sub dgdxval mul add} def
-/bluevalue {BlueA gidx get BlueA gidx 1 sub get
-  BlueA gidx get sub dgdxval mul add} def
-/interpolate {
-  grayindex grayv GrayA gidx get sub abs 1e-5 le
-    {RedA gidx get GreenA gidx get BlueA gidx get}
-    {/dgdxval dgdx def redvalue greenvalue bluevalue} ifelse} def
-/GrayA [0 .3333 .6667 1 ] def
-/RedA [0 0 1 1 ] def
-/GreenA [1 0 0 .6471 ] def
-/BlueA [0 1 0 0 ] def
-/pm3dround {maxcolors 0 gt {dup 1 ge
-	{pop 1} {maxcolors mul floor maxcolors 1 sub div} ifelse} if} def
-/pm3dGamma 1.0 1.5 Gamma mul div def
-/ColorSpace (RGB) def
-Color InterpolatedColor or { % COLOUR vs. GRAY map
-  InterpolatedColor { %% Interpolation vs. RGB-Formula
-    /g {stroke pm3dround /grayv exch def interpolate
-        SelectSpace setrgbcolor} bind def
-  }{
-  /g {stroke pm3dround dup cF7 Constrain exch dup cF5 Constrain exch cF15 Constrain 
-       SelectSpace setrgbcolor} bind def
-  } ifelse
-}{
-  /g {stroke pm3dround pm3dGamma exp setgray} bind def
-} ifelse
 1.000 UL
 LTb
 LCb setrgbcolor
-462 280 M
+462 836 M
 63 0 V
-5513 0 R
+6422 0 R
 -63 0 V
 stroke
-378 280 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-10)]
+378 836 M
+[ [(Helvetica) 140.0 0.0 true true 0 (-60)]
 ] -46.7 MRshow
 1.000 UL
 LTb
 LCb setrgbcolor
-462 1435 M
+462 1433 M
 63 0 V
-5513 0 R
+6422 0 R
 -63 0 V
 stroke
-378 1435 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-5)]
+378 1433 M
+[ [(Helvetica) 140.0 0.0 true true 0 (-40)]
 ] -46.7 MRshow
 1.000 UL
 LTb
 LCb setrgbcolor
-462 2590 M
+462 2029 M
 63 0 V
-5513 0 R
+6422 0 R
 -63 0 V
 stroke
-378 2590 M
+378 2029 M
+[ [(Helvetica) 140.0 0.0 true true 0 (-20)]
+] -46.7 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+462 2625 M
+63 0 V
+6422 0 R
+-63 0 V
+stroke
+378 2625 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 0)]
 ] -46.7 MRshow
 1.000 UL
 LTb
 LCb setrgbcolor
-462 3744 M
+462 3222 M
 63 0 V
-5513 0 R
+6422 0 R
 -63 0 V
 stroke
-378 3744 M
+378 3222 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 20)]
+] -46.7 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+462 3818 M
+63 0 V
+6422 0 R
+-63 0 V
+stroke
+378 3818 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 40)]
+] -46.7 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+462 4414 M
+63 0 V
+6422 0 R
+-63 0 V
+stroke
+378 4414 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 60)]
+] -46.7 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1546 280 M
+0 63 V
+0 4556 R
+0 -63 V
+stroke
+1546 140 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 5)]
-] -46.7 MRshow
+] -46.7 MCshow
 1.000 UL
 LTb
 LCb setrgbcolor
-462 4899 M
-63 0 V
-5513 0 R
--63 0 V
+2901 280 M
+0 63 V
+0 4556 R
+0 -63 V
 stroke
-378 4899 M
+2901 140 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 10)]
-] -46.7 MRshow
-1.000 UL
-LTb
-LCb setrgbcolor
-462 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-462 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-6)]
 ] -46.7 MCshow
 1.000 UL
 LTb
 LCb setrgbcolor
-1259 280 M
+4257 280 M
 0 63 V
 0 4556 R
 0 -63 V
 stroke
-1259 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-4)]
+4257 140 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 15)]
 ] -46.7 MCshow
 1.000 UL
 LTb
 LCb setrgbcolor
-2055 280 M
+5612 280 M
 0 63 V
 0 4556 R
 0 -63 V
 stroke
-2055 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-2)]
-] -46.7 MCshow
-1.000 UL
-LTb
-LCb setrgbcolor
-2852 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-2852 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0)]
-] -46.7 MCshow
-1.000 UL
-LTb
-LCb setrgbcolor
-3648 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-3648 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 2)]
-] -46.7 MCshow
-1.000 UL
-LTb
-LCb setrgbcolor
-4445 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-4445 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 4)]
-] -46.7 MCshow
-1.000 UL
-LTb
-LCb setrgbcolor
-5241 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-5241 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 6)]
-] -46.7 MCshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6038 280 M
-0 63 V
-0 4556 R
-0 -63 V
-stroke
-6038 140 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 8)]
+5612 140 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 20)]
 ] -46.7 MCshow
 1.000 UL
 LTb
@@ -736,9 +656,9 @@ LTB
 LCb setrgbcolor
 462 4899 N
 462 280 L
-5576 0 V
+6485 0 V
 0 4619 V
--5576 0 V
+-6485 0 V
 Z stroke
 1.000 UP
 1.000 UL
@@ -748,20 +668,1079 @@ LCb setrgbcolor
 1.000 UP
 1.000 UL
 LTb
-.5 g /Helvetica findfont 140 scalefont setfont
 LCb setrgbcolor
-5387 4766 M
-('test' using 1:2:2) Rshow
-.5 g .5 g 2852 2590 Pls
-.7 g 4445 3513 Pls
-.7 g 2852 3513 Pls
-.5 g 4445 2590 Pls
-.5 g 4843 2590 Pls
-1 g 5640 4899 Pls
-.675 g 2055 3398 Pls
-.4 g 860 2128 Pls
-0 g 4047 280 Pls
-5670 4766 Pls
+LCb setrgbcolor
+6296 4766 M
+[ [(Helvetica) 140.0 0.0 true true 0 (Initial data)]
+] -46.7 MRshow
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
+6618 2549 Pls
+6634 2909 Pls
+6399 3106 Pls
+578 2627 Pls
+6619 2548 Pls
+2947 3863 Pls
+3610 4480 Pls
+5616 1278 Pls
+4889 4060 Pls
+1016 2628 Pls
+4888 4059 Pls
+6636 2910 Pls
+2949 3866 Pls
+6100 2832 Pls
+6101 2834 Pls
+742 2314 Pls
+6448 2719 Pls
+6446 2720 Pls
+4463 4390 Pls
+4889 4058 Pls
+6635 2910 Pls
+2719 4149 Pls
+1353 2504 Pls
+6635 2908 Pls
+3610 4480 Pls
+2721 4149 Pls
+2912 4661 Pls
+6636 2908 Pls
+4888 4060 Pls
+6099 2832 Pls
+2722 4151 Pls
+1352 2502 Pls
+3198 2629 Pls
+6635 2910 Pls
+6620 2546 Pls
+2721 4150 Pls
+1352 2502 Pls
+1352 2501 Pls
+2948 3863 Pls
+6637 2909 Pls
+2918 4661 Pls
+576 2628 Pls
+1353 2504 Pls
+578 2627 Pls
+741 2315 Pls
+6101 2833 Pls
+1352 2503 Pls
+1354 2502 Pls
+2583 2692 Pls
+578 2630 Pls
+2718 4149 Pls
+1352 2504 Pls
+6448 2719 Pls
+2949 3863 Pls
+6397 3108 Pls
+2949 3865 Pls
+6620 2546 Pls
+6619 2547 Pls
+1153 1610 Pls
+2719 4150 Pls
+4619 3150 Pls
+579 2629 Pls
+577 2628 Pls
+1352 2502 Pls
+509 2575 Pls
+578 2628 Pls
+3634 2973 Pls
+6637 2911 Pls
+6446 2719 Pls
+1354 2503 Pls
+6445 2719 Pls
+4620 3152 Pls
+509 2576 Pls
+577 2629 Pls
+2950 3863 Pls
+1353 2501 Pls
+6100 2832 Pls
+6082 1479 Pls
+6447 2719 Pls
+3278 2674 Pls
+4885 4058 Pls
+2947 3863 Pls
+742 2315 Pls
+6399 3106 Pls
+2949 3862 Pls
+2720 4148 Pls
+2914 4658 Pls
+3875 2664 Pls
+1354 2504 Pls
+509 2575 Pls
+6636 2910 Pls
+6635 2908 Pls
+2719 4149 Pls
+2720 4150 Pls
+6101 2833 Pls
+509 2576 Pls
+6398 3106 Pls
+576 2627 Pls
+2720 4151 Pls
+576 2627 Pls
+6618 2547 Pls
+578 2629 Pls
+6100 2833 Pls
+6619 2548 Pls
+6634 2908 Pls
+2719 4150 Pls
+1354 2502 Pls
+509 2575 Pls
+2947 3863 Pls
+1352 2503 Pls
+4886 4060 Pls
+5989 1046 Pls
+6634 2909 Pls
+578 2629 Pls
+2948 3863 Pls
+2721 4149 Pls
+4886 4059 Pls
+3422 4527 Pls
+6397 3106 Pls
+1353 2502 Pls
+6620 2548 Pls
+777 2633 Pls
+4619 3150 Pls
+4621 3152 Pls
+6637 2909 Pls
+509 2575 Pls
+2722 4149 Pls
+6619 2545 Pls
+6636 2908 Pls
+2919 4658 Pls
+6635 2907 Pls
+6636 2908 Pls
+6101 2832 Pls
+6100 2833 Pls
+6445 2722 Pls
+2917 4661 Pls
+508 2576 Pls
+5498 1100 Pls
+6635 2909 Pls
+6101 2832 Pls
+2400 2826 Pls
+576 2628 Pls
+2949 3866 Pls
+6619 2548 Pls
+6100 2833 Pls
+6635 2910 Pls
+4619 3151 Pls
+6634 2908 Pls
+6099 2834 Pls
+6445 2720 Pls
+4887 4058 Pls
+6447 2720 Pls
+1353 2504 Pls
+6619 2549 Pls
+1353 2504 Pls
+2721 4148 Pls
+742 2315 Pls
+6099 2833 Pls
+4620 3151 Pls
+2719 4147 Pls
+6099 2832 Pls
+6618 2547 Pls
+1353 2504 Pls
+6446 2719 Pls
+6100 2833 Pls
+6446 2721 Pls
+6620 2546 Pls
+1353 2502 Pls
+2918 4661 Pls
+1354 2503 Pls
+6445 2722 Pls
+6397 3106 Pls
+2720 4149 Pls
+741 2315 Pls
+6399 3107 Pls
+3450 2059 Pls
+6101 2833 Pls
+6099 2833 Pls
+2033 4720 Pls
+6637 2909 Pls
+1355 2504 Pls
+6101 2832 Pls
+4621 3150 Pls
+2721 4148 Pls
+6101 2834 Pls
+6100 2833 Pls
+1353 2502 Pls
+5367 4724 Pls
+5630 2262 Pls
+2719 4149 Pls
+6101 2834 Pls
+2948 3863 Pls
+1352 2503 Pls
+509 2576 Pls
+1354 2502 Pls
+741 2314 Pls
+6634 2908 Pls
+6635 2910 Pls
+6101 2832 Pls
+2949 3866 Pls
+577 2629 Pls
+1512 1787 Pls
+6446 2721 Pls
+6101 2833 Pls
+2948 3864 Pls
+2722 4148 Pls
+4886 4059 Pls
+4621 3151 Pls
+6101 2833 Pls
+6099 2832 Pls
+762 3107 Pls
+2950 3862 Pls
+4887 4060 Pls
+577 2630 Pls
+6637 2908 Pls
+576 2630 Pls
+6636 2908 Pls
+1354 2504 Pls
+742 2312 Pls
+6447 2719 Pls
+4618 3151 Pls
+507 2575 Pls
+2950 3864 Pls
+6100 2833 Pls
+576 2627 Pls
+3575 2687 Pls
+578 2628 Pls
+2723 4150 Pls
+6619 2549 Pls
+577 2627 Pls
+5231 4195 Pls
+6619 2549 Pls
+6399 3105 Pls
+4888 4059 Pls
+2721 4150 Pls
+6100 2833 Pls
+6620 2548 Pls
+4817 1989 Pls
+742 2314 Pls
+2721 4149 Pls
+1354 2501 Pls
+577 2629 Pls
+2722 4148 Pls
+4888 4057 Pls
+6635 2910 Pls
+578 2627 Pls
+6447 2720 Pls
+6099 2832 Pls
+2949 3864 Pls
+743 2313 Pls
+6100 2833 Pls
+6396 3106 Pls
+2913 4659 Pls
+4620 3150 Pls
+6634 2909 Pls
+6447 2722 Pls
+6636 2910 Pls
+817 2856 Pls
+578 2630 Pls
+4886 4058 Pls
+1354 2502 Pls
+6099 2834 Pls
+6398 3107 Pls
+509 2576 Pls
+577 2629 Pls
+4619 3151 Pls
+1354 2503 Pls
+1354 2504 Pls
+6447 2719 Pls
+6618 2547 Pls
+6619 2546 Pls
+6637 2910 Pls
+6099 2832 Pls
+6447 2720 Pls
+6635 2910 Pls
+2722 4148 Pls
+3682 1775 Pls
+6100 2834 Pls
+2720 4150 Pls
+6397 3106 Pls
+1354 2504 Pls
+6636 2909 Pls
+6636 2911 Pls
+1352 2502 Pls
+4889 4058 Pls
+6635 2910 Pls
+6447 2720 Pls
+6447 2719 Pls
+4888 4059 Pls
+4887 4059 Pls
+1151 1849 Pls
+743 2312 Pls
+2950 3865 Pls
+6447 2720 Pls
+1354 2503 Pls
+6101 2832 Pls
+6099 2834 Pls
+6636 2909 Pls
+6101 2833 Pls
+2519 1287 Pls
+577 2627 Pls
+578 2627 Pls
+2950 3863 Pls
+6099 2834 Pls
+576 2627 Pls
+2719 4147 Pls
+4618 3149 Pls
+6397 3106 Pls
+4618 3149 Pls
+1353 2504 Pls
+508 2577 Pls
+2965 2725 Pls
+6635 2908 Pls
+6099 2833 Pls
+6398 3106 Pls
+6447 2720 Pls
+507 2576 Pls
+4887 4059 Pls
+4619 3149 Pls
+2718 4149 Pls
+2947 3864 Pls
+1352 2504 Pls
+857 3638 Pls
+2722 4150 Pls
+1153 1610 Pls
+6397 3106 Pls
+2948 3865 Pls
+6100 2833 Pls
+3610 4480 Pls
+6099 2833 Pls
+6636 2907 Pls
+6099 2833 Pls
+4618 3151 Pls
+1236 3469 Pls
+2949 3863 Pls
+4621 3150 Pls
+6100 2834 Pls
+578 2629 Pls
+4620 3150 Pls
+2913 4659 Pls
+6446 2719 Pls
+508 2575 Pls
+6099 2834 Pls
+6619 2547 Pls
+2949 3863 Pls
+1354 2504 Pls
+576 2630 Pls
+741 2315 Pls
+2721 4148 Pls
+6635 2910 Pls
+2719 4150 Pls
+576 2629 Pls
+6636 2908 Pls
+578 2629 Pls
+2916 4659 Pls
+507 2574 Pls
+6635 2910 Pls
+2871 4698 Pls
+6099 2833 Pls
+2950 3865 Pls
+1354 2504 Pls
+6398 3108 Pls
+2949 3865 Pls
+6447 2720 Pls
+6398 3106 Pls
+6397 3106 Pls
+6397 3107 Pls
+4885 4058 Pls
+3640 2969 Pls
+2949 3862 Pls
+4619 3149 Pls
+2585 4150 Pls
+4621 3151 Pls
+1354 2502 Pls
+579 2628 Pls
+2948 3864 Pls
+4886 4058 Pls
+6101 2833 Pls
+6099 2832 Pls
+6396 3108 Pls
+1353 2504 Pls
+6101 2833 Pls
+4620 3150 Pls
+4620 3150 Pls
+3122 3990 Pls
+4067 4194 Pls
+4885 4060 Pls
+6445 2720 Pls
+2721 4150 Pls
+742 2315 Pls
+4620 3150 Pls
+6447 2719 Pls
+2947 3864 Pls
+507 2574 Pls
+6099 2833 Pls
+509 2577 Pls
+3766 2605 Pls
+742 2312 Pls
+6445 2722 Pls
+3977 1712 Pls
+509 2576 Pls
+4621 3150 Pls
+6618 2548 Pls
+578 2629 Pls
+1354 2502 Pls
+509 2576 Pls
+2949 3862 Pls
+743 2314 Pls
+2919 4658 Pls
+577 2627 Pls
+2721 4150 Pls
+6100 2832 Pls
+1055 2665 Pls
+6099 2834 Pls
+507 2577 Pls
+509 2576 Pls
+6620 2546 Pls
+6618 2546 Pls
+743 2313 Pls
+577 2628 Pls
+2949 3864 Pls
+2722 4150 Pls
+6619 2548 Pls
+1353 2502 Pls
+1354 2501 Pls
+6398 3105 Pls
+2719 4149 Pls
+578 2628 Pls
+6396 3107 Pls
+6619 2548 Pls
+2916 4658 Pls
+6618 2546 Pls
+4620 3149 Pls
+6100 2833 Pls
+4843 4391 Pls
+2721 4151 Pls
+6620 2547 Pls
+2947 3864 Pls
+1352 2503 Pls
+5497 4129 Pls
+4886 4057 Pls
+6447 2720 Pls
+6397 3107 Pls
+742 2312 Pls
+509 2576 Pls
+2948 3863 Pls
+6619 2548 Pls
+6101 2831 Pls
+2914 4658 Pls
+6447 2721 Pls
+743 2313 Pls
+6099 2833 Pls
+6634 2908 Pls
+6100 2832 Pls
+509 2576 Pls
+578 2628 Pls
+6446 2720 Pls
+508 2574 Pls
+2722 4149 Pls
+2833 4636 Pls
+2721 4148 Pls
+6635 2910 Pls
+3450 2059 Pls
+6397 3106 Pls
+6637 2910 Pls
+6099 2833 Pls
+6634 2908 Pls
+2947 3864 Pls
+2721 4151 Pls
+576 2627 Pls
+1353 2504 Pls
+6398 3107 Pls
+576 2628 Pls
+2948 3864 Pls
+4621 3150 Pls
+577 2630 Pls
+1352 2502 Pls
+3597 3253 Pls
+6618 2547 Pls
+2948 3863 Pls
+3610 4480 Pls
+4620 3151 Pls
+2719 4149 Pls
+4350 2854 Pls
+6636 2908 Pls
+6101 2834 Pls
+4887 4058 Pls
+743 2314 Pls
+6619 2549 Pls
+6620 2548 Pls
+6620 2547 Pls
+4619 3149 Pls
+6636 2910 Pls
+3256 3074 Pls
+6635 2907 Pls
+2950 3864 Pls
+2719 4149 Pls
+2948 3864 Pls
+1354 2501 Pls
+6101 2833 Pls
+743 2315 Pls
+6445 2720 Pls
+6399 3107 Pls
+1354 2504 Pls
+6637 2910 Pls
+6634 2910 Pls
+1352 2502 Pls
+6636 2911 Pls
+4621 3151 Pls
+577 2628 Pls
+6618 2548 Pls
+6396 3107 Pls
+6101 2833 Pls
+2947 3864 Pls
+6398 3107 Pls
+2722 4147 Pls
+6101 2834 Pls
+6398 3106 Pls
+508 2576 Pls
+6446 2720 Pls
+4619 3150 Pls
+508 2576 Pls
+6635 2908 Pls
+6100 2833 Pls
+1353 2504 Pls
+4564 2961 Pls
+6634 2908 Pls
+4621 3150 Pls
+6101 2832 Pls
+469 1663 Pls
+576 2627 Pls
+2718 4150 Pls
+6397 3106 Pls
+742 2315 Pls
+6636 2909 Pls
+4620 3151 Pls
+6618 2548 Pls
+5128 4664 Pls
+6100 2834 Pls
+6100 2832 Pls
+4620 3150 Pls
+6620 2545 Pls
+1353 2502 Pls
+1353 2502 Pls
+4619 3150 Pls
+1352 2503 Pls
+2722 4150 Pls
+2719 4149 Pls
+6634 2908 Pls
+3575 2687 Pls
+4886 4058 Pls
+4618 3149 Pls
+2935 629 Pls
+2719 4148 Pls
+2723 4150 Pls
+6620 2546 Pls
+6100 2832 Pls
+6619 2548 Pls
+6398 3105 Pls
+4620 3149 Pls
+4619 3150 Pls
+507 2576 Pls
+2947 3864 Pls
+1353 2502 Pls
+2720 4148 Pls
+2950 3863 Pls
+1352 2505 Pls
+509 2575 Pls
+6636 2911 Pls
+4888 4058 Pls
+6099 2834 Pls
+6446 2722 Pls
+4556 4279 Pls
+6398 3107 Pls
+6636 2909 Pls
+6101 2833 Pls
+6618 2546 Pls
+6636 2908 Pls
+6447 2721 Pls
+577 2630 Pls
+6634 2909 Pls
+1353 2502 Pls
+6618 2546 Pls
+6397 3108 Pls
+741 2313 Pls
+6397 3107 Pls
+4889 4059 Pls
+6099 2833 Pls
+6374 1329 Pls
+6448 2721 Pls
+4886 4059 Pls
+1354 2502 Pls
+4619 3149 Pls
+1354 2502 Pls
+3772 3900 Pls
+576 2627 Pls
+6099 2832 Pls
+3250 3539 Pls
+6446 2719 Pls
+6636 2908 Pls
+578 2630 Pls
+2934 3487 Pls
+742 2312 Pls
+507 2574 Pls
+6100 2833 Pls
+2948 3863 Pls
+577 2628 Pls
+3223 3481 Pls
+4803 4167 Pls
+3014 2646 Pls
+3771 3899 Pls
+3770 3900 Pls
+6212 2653 Pls
+1589 2962 Pls
+6219 2654 Pls
+6218 2654 Pls
+3492 2367 Pls
+3492 2367 Pls
+6219 2656 Pls
+6222 2656 Pls
+6222 2656 Pls
+4670 2691 Pls
+5349 2521 Pls
+5334 2540 Pls
+6208 2661 Pls
+5827 2158 Pls
+2977 3924 Pls
+5776 2422 Pls
+5853 2399 Pls
+5593 2707 Pls
+5877 2497 Pls
+5408 2932 Pls
+5797 2604 Pls
+4620 3427 Pls
+3848 3497 Pls
+5134 3845 Pls
+6217 2674 Pls
+4478 3932 Pls
+5928 3342 Pls
+6212 2676 Pls
+6301 3018 Pls
+6301 3018 Pls
+6301 3018 Pls
+5272 4132 Pls
+6364 2928 Pls
+6628 2902 Pls
+6467 2788 Pls
+6476 2783 Pls
+3503 2056 Pls
+6676 2449 Pls
+5989 4144 Pls
+6601 2809 Pls
+6601 2809 Pls
+6619 2759 Pls
+6670 2703 Pls
+6644 2838 Pls
+6656 2801 Pls
+3609 4480 Pls
+6652 2948 Pls
+6648 4145 Pls
+5552 2077 Pls
+3447 4119 Pls
+921 3111 Pls
+917 3118 Pls
+2374 4368 Pls
+1829 4159 Pls
+1039 2936 Pls
+1011 2871 Pls
+1909 991 Pls
+1391 3026 Pls
+1349 2738 Pls
+3609 4480 Pls
+3039 2857 Pls
+2297 1804 Pls
+3205 2533 Pls
+6288 3209 Pls
+3609 4480 Pls
+1817 4869 Pls
+3884 1489 Pls
+2779 2311 Pls
+4851 738 Pls
+3717 4575 Pls
+561 2296 Pls
+3200 2022 Pls
+4211 2468 Pls
+4211 2468 Pls
+4027 4447 Pls
+4843 4367 Pls
+2384 3538 Pls
+6038 2945 Pls
+4023 2559 Pls
+3609 4480 Pls
+5452 3680 Pls
+5578 2604 Pls
+4441 2642 Pls
+4176 2639 Pls
+3619 4628 Pls
+2761 3938 Pls
+5848 2626 Pls
+3337 2577 Pls
+3743 2804 Pls
+6083 2422 Pls
+2950 2807 Pls
+3306 3645 Pls
+3609 4480 Pls
+513 2625 Pls
+4485 4184 Pls
+3403 4561 Pls
+3302 4372 Pls
+2588 2686 Pls
+3177 2852 Pls
+3609 4480 Pls
+6099 2641 Pls
+6386 2370 Pls
+1117 2601 Pls
+6051 2391 Pls
+3260 4246 Pls
+2420 3976 Pls
+5805 2460 Pls
+6189 2396 Pls
+3977 1712 Pls
+4098 3733 Pls
+3609 4480 Pls
+4301 2931 Pls
+3620 2811 Pls
+3609 4480 Pls
+3797 3618 Pls
+2869 3297 Pls
+3483 3858 Pls
+3721 3816 Pls
+6356 2646 Pls
+2625 2736 Pls
+3609 4480 Pls
+2729 3092 Pls
+3123 3358 Pls
+3322 3330 Pls
+4140 2850 Pls
+3609 4480 Pls
+1148 1843 Pls
+4242 4470 Pls
+3584 2920 Pls
+3584 2920 Pls
+4377 3408 Pls
+2494 4055 Pls
+6139 2407 Pls
+2454 2681 Pls
+3609 4480 Pls
+2832 2772 Pls
+3226 3635 Pls
+3029 4245 Pls
+3542 4290 Pls
+3609 4480 Pls
+3595 2635 Pls
+3804 2835 Pls
+3453 4389 Pls
+4206 2891 Pls
+3916 2724 Pls
+5943 2973 Pls
+3302 3201 Pls
+4825 4393 Pls
+4470 3014 Pls
+4529 3617 Pls
+3889 4514 Pls
+3330 3206 Pls
+4487 3980 Pls
+2600 3568 Pls
+2601 3569 Pls
+3609 4480 Pls
+3515 2688 Pls
+3144 3358 Pls
+4784 3705 Pls
+3142 3830 Pls
+3635 3785 Pls
+4583 3551 Pls
+3609 4480 Pls
+3780 2878 Pls
+4201 3521 Pls
+4547 3443 Pls
+3609 4480 Pls
+3252 3963 Pls
+3331 4347 Pls
+4817 4170 Pls
+4650 3015 Pls
+3629 3059 Pls
+3126 3297 Pls
+2924 3045 Pls
+3080 3802 Pls
+3609 4480 Pls
+3000 3046 Pls
+3026 3057 Pls
+4870 3528 Pls
+4304 2745 Pls
+1178 1602 Pls
+5926 2409 Pls
+3609 4480 Pls
+3495 2838 Pls
+4106 4564 Pls
+3118 3081 Pls
+1262 2646 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+1169 1589 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+1192 1587 Pls
+3609 4480 Pls
+2753 3528 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+1184 1595 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+6212 2678 Pls
+6211 2679 Pls
+6216 2694 Pls
+3609 4480 Pls
+6222 2702 Pls
+6221 2707 Pls
+3446 3224 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+6482 3173 Pls
+3609 4480 Pls
+3609 4480 Pls
+3609 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+3610 4480 Pls
+6579 4766 Pls
 % End plot #1
 2.000 UL
 LTb
@@ -771,93 +1750,14 @@ LTB
 LCb setrgbcolor
 462 4899 N
 462 280 L
-5576 0 V
+6485 0 V
 0 4619 V
--5576 0 V
+-6485 0 V
 Z stroke
-stroke gsave	%% draw gray scale smooth box
-maxcolors 0 gt {/imax maxcolors def} {/imax 1024 def} ifelse
-6177 280 translate 278 4619 scale 0 setlinewidth
-/ystep 1 imax div def /y0 0 def /ii 0 def
-{ y0 g 0 y0 N 1 0 V 0 ystep V -1 0 f
-/y0 y0 ystep add def /ii ii 1 add def
-ii imax ge {exit} if } loop
-grestore 0 setgray
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 280 N
-278 0 V
-0 4619 V
--278 0 V
-0 -4619 V
-Z stroke
-1.000 UL
-LTb
-LCb setrgbcolor
-1.000 UL
-LTb
-LCb setrgbcolor
-6455 280 M
--63 0 V
-stroke
-6539 280 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-10)]
-] -46.7 MLshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 280 M
-63 0 V
-215 1154 R
--63 0 V
-stroke
-6539 1434 M
-[ [(Helvetica) 140.0 0.0 true true 0 (-5)]
-] -46.7 MLshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 1434 M
-63 0 V
-215 1155 R
--63 0 V
-stroke
-6539 2589 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0)]
-] -46.7 MLshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 2589 M
-63 0 V
-215 1155 R
--63 0 V
-stroke
-6539 3744 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 5)]
-] -46.7 MLshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 3744 M
-63 0 V
-215 1155 R
--63 0 V
-stroke
-6539 4899 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 10)]
-] -46.7 MLshow
-1.000 UL
-LTb
-LCb setrgbcolor
-6177 4899 M
-63 0 V
 1.000 UP
-stroke
+1.000 UL
 LTb
 LCb setrgbcolor
-grestore % colour palette end
 stroke
 grestore
 end
