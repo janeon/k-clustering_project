@@ -1,7 +1,14 @@
 #!/bin/sh
 #run this with the SIM search file:
 
+declare -a array=("|Gic|"  "|BiC|" "|GiG|" "|GiP|" "|EmG|" "|Sy1|" "|Sy2|" )
 
-grep "|G  " $1      |  #gives us galaxies
-cut -f 2,5 -d "|"   |  #gives us the names and numbers
-sed '/|No Coord./d'    #removes datapoints with no coordinates
+#Shell scripting doesn't like two spaces in a row
+grep "|G  |" $1  | cut -f 2,5 -d "|" | sed '/|No Coord./d'
+
+for element in "${array[@]}"
+do
+        grep $element $1 |
+        cut -f 2,5 -d "|"|
+        sed '/|No Coord./d'
+done
