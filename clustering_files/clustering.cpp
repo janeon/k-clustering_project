@@ -349,7 +349,7 @@ private:
     }
 
     void printClusters() {
-        ofstream outfile(to_string(k)+"-centered_"+file); // name original file is inserted
+        ofstream outfile("centered_cleansets/"+to_string(k)+"-centered_"+file); // name original file is inserted
         if (outfile.is_open())  {
             for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
                 Cluster *clust = c;
