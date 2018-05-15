@@ -13,7 +13,10 @@ int main() {
     Gnuplot gp;
     gp << "set terminal postscript\n";
     gp << "set output \"hello.eps\"\n";
+    
     gp << "plot ["<<xmin<<":"<<xmax<<"] ["<<ymin<<":"<<ymax<<"] '-' tit 'data'\n";
+    gp.send1d(data);
+    gp << "plot ["<<xmin<<":"<<xmax<<"] ["<<ymin<<":"<<ymax<<"] '-' tit '2nddata'\n";
     gp.send1d(data);
     return 0;
 }

@@ -267,10 +267,10 @@ private:
     float xmax = 0, ymax = 0, xmin = 0, ymin = 0;  // used to set the range in gnuplots
 	vector<Point*> oldCenters; // stores the previously calculated centers for comparison
 	bool changed; // whether or not the centers have changed - ending condition
-	Map *map; 
-    vector<pair<float,float>> data;
+    Map *map; string file; // name of input file
+    vector<pair<float,float>> data; // set of points for visual plotting
 	// add points
-	void populate(string file) {
+	void populate() {
         ifstream infile (file);
         float x, y;
         string line;
@@ -301,15 +301,8 @@ private:
             data.emplace_back(x,y);
             cout << "Point located at: (" << x << "," << y <<  ")\n";
         }
-
-        Gnuplot gp;
-        gp << "set terminal postscript\n";
-        gp << "set output \""<< file <<".eps\"\n";
-        gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Initial data'\n";
-        gp.send1d(data);
         infile.close();
-        cout << "Xmin: " << xmin << "Xmax:" << xmax << endl;
-        cout << "Ymin: " << ymin << "Ymax:" << ymax << endl;
+
         /*
         map->addPoint(new Point(0, 0));
 		map->addPoint(new Point(4, 4));
@@ -330,6 +323,14 @@ private:
 	// initial clustering
 	void firstCluster() {
 		map->initiate(k);
+        Gnuplot gp;
+        gp << "set terminal postscript\n";
+        gp << "set output \""<< file <<".eps\"\n";
+        gp << "set title 'initial' \n";
+        gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Initial data'\n";
+        gp.send1d(data);
+        cout << "Xmin: " << xmin << " Xmax: " << xmax << endl;
+        cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
     }
 	
 	bool recluster() {
@@ -337,6 +338,43 @@ private:
 		cout << "reclustering" << endl;
 		return map->recluster();
 	}
+    
+    void printClusters() {
+        ofstream outfile(to_string(k)+"-centered_"+file); // name original file will need to be inserted
+        if (outfile.is_open())  {
+            for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
+                Cluster *clust = c;
+                outfile << "C:" << c->centerx << " " << c->centery << endl;
+                for (const auto&  point: c -> points) {
+                    outfile << point->getx() << " " << point->gety() <<  endl;
+                }
+            }
+            outfile.close();
+            // for () // The points follow the line with the cluster center, with no prefixes
+        }
+        else cout << "The file was not opened" << endl;
+    }
+    // loop the algorithm until centers don't change or the limit is hit
+    void doClustering() {
+        int i = 0; // counter for limit
+        Gnuplot gp;
+        gp << "set terminal postscript\n";
+        gp << "set output \""<< file <<".eps\"\n";
+        while (i < limit && changed) {
+            cout << "Iteration " << i+1 << endl;
+            changed = recluster();
+            cout << "Changed:" << changed << endl;
+            i++;
+            gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Iteration "<< i <<"'\n";
+            gp.send1d(data);
+        }
+        if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
+        else cout << "K-means has not converged but clustering limit has been reached" << endl;
+        cout << "Number of iterations: " << i << endl;
+        cout << "Xmin: " << xmin << " Xmax: " << xmax << endl;
+        cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
+    }
+    
 
 public:
 	KMeans(Map *map, int k, int limit, string file) {
@@ -347,51 +385,23 @@ public:
 		this->map = map;
 		this->k = k;
 		this->limit = limit;
+        this->file = file;
 		changed = true;
 
 		cout << "K = " << k << ", Iteration limit = " << limit << endl;
 		
-		populate(file); // add all the points
+		populate(); // add all the points
 		firstCluster(); // set random clusters and sort
 		doClustering(); // do the algorithm
-        printClusters(file); // outputs the final clustering to an output file, which is named by the original file, followed by the postfix "centered"
+        printClusters(); // outputs the final clustering to an output file, which is named by the original file, prefixed by "k-centered_"
 	}
 
-	// loop the algorithm until centers don't change or the limit is hit
-	void doClustering() {
-		int i = 0; // counter for limit
-		while (i < limit && changed) {
-			cout << "Iteration " << i+1 << endl;
-			changed = recluster();
-			cout << "Changed:" << changed << endl;
-			i++;
-		}
-        if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
-        else cout << "K-means has not converged but clustering limit has been reached" << endl;
-        cout << "Number of iterations: " << i << endl;
-	}
-    
-    void printClusters(string file) {
-        ofstream outfile(file+"_centered"); // name original file will need to be inserted
-        if (outfile.is_open())  {
-            for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
-                    Cluster *clust = c;
-                outfile << "C:" << c->centerx << " " << c->centery << endl;
-            for (const auto&  point: c -> points) {
-                outfile << point->getx() << " " << point->gety() <<  endl;
-            }
-        }
-            outfile.close();
-            // for () // The points follow the line with the cluster center, with no prefixes
-    }
-        else cout << "The file was not opened" << endl;
-    }
 };
 
 
 int main() {
 	
-	int k = 4; // the number of clusters
+	int k; // the number of clusters
     int limit = pow(4.0,9.0); // the iteration limit
     // So k-means is supposed to converge in a finite number of steps
     // (at most k^n) but as a sanity check that our program doesn't loop infinitely we set the iteration limit to k^n
