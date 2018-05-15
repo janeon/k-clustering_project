@@ -20,10 +20,12 @@
 #include <iostream>
 #include <fstream>
 #include <iterator>
+#include <string.h>
 
 class Point;
 class Cluster;
 class Map;
 class KMeans;
+
 
 #endif
