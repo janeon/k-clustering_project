@@ -58,8 +58,8 @@ public:
 	}
 };
 
-// Class for a determined cluster of points
 class Cluster {
+// Class for a determined cluster of points
 public:
 
 	// collection of all the points in the cluster
@@ -136,7 +136,6 @@ class Map {
     // then assign all of them centers with sort()
 private:
 	vector<Point*> allPoints; // vector of all points on map
-
 	// add a cluster with the given center
 	void addCluster(Point *newcenter) {
 		allClusters.push_back(new Cluster(newcenter->getx(), newcenter->gety()));
@@ -265,20 +264,22 @@ class KMeans {
 private:
 	int k; // specified number of clusters
 	int limit; // the iteration limit of the algorithm
+    float xmax = 0, ymax = 0, xmin = 0, ymin = 0;  // used to set the range in gnuplots
 	vector<Point*> oldCenters; // stores the previously calculated centers for comparison
 	bool changed; // whether or not the centers have changed - ending condition
 	Map *map; 
-
+    vector<pair<float,float>> data;
 	// add points
 	void populate(string file) {
         ifstream infile (file);
-        float x, y; string line;
+        float x, y;
+        string line;
         while (getline(infile, line))  {
             istringstream ln(line);
             istream_iterator<string> start(ln), end;
             vector<string> tokens(start,end);
             cout << "Point located at: (" << tokens.at(tokens.size()-2) << "," << tokens.at(tokens.size()-1) <<  ")\n";
-            /* jk not using boost, assuming user is inputting files with right format
+            /* jk not using boost, we now assume that the user (us) is inputting files with the right format
              using boost::lexical_cast;
             using boost::bad_lexical_cast;
             try {
@@ -292,11 +293,23 @@ private:
              */
             x = stof(tokens.at(tokens.size()-2));
             y = stof(tokens.at(tokens.size()-1));
+            // finding max and min values
+            if (xmax < x) xmax = x; if (xmin > x) xmin = x;
+            if (ymax < y) ymax = y; if (ymin > y) ymin = y;
+            
             map->addPoint(new Point(x, y));
+            data.emplace_back(x,y);
             cout << "Point located at: (" << x << "," << y <<  ")\n";
         }
+
+        Gnuplot gp;
+        gp << "set terminal postscript\n";
+        gp << "set output \""<< file <<".eps\"\n";
+        gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Initial data'\n";
+        gp.send1d(data);
         infile.close();
-        
+        cout << "Xmin: " << xmin << "Xmax:" << xmax << endl;
+        cout << "Ymin: " << ymin << "Ymax:" << ymax << endl;
         /*
         map->addPoint(new Point(0, 0));
 		map->addPoint(new Point(4, 4));
@@ -317,8 +330,7 @@ private:
 	// initial clustering
 	void firstCluster() {
 		map->initiate(k);
-	}
-
+    }
 	
 	bool recluster() {
         // calculate new centers based on average coordinates of all points in each cluster, resort points
