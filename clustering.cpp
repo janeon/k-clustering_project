@@ -6,8 +6,8 @@
 //============================================================================
 
 #include "clustering.h"
-//#include "gnuplot-iostream.h"
-//#include <boost/lexical_cast.hpp>
+#include "gnuplot-iostream.h"
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
@@ -332,12 +332,12 @@ private:
     // initial clustering
     void firstCluster() {
         map->initiate(k);
-        /*Gnuplot gp;
+        Gnuplot gp;
         gp << "set terminal postscript\n";
         gp << "set output \""<< file <<".eps\"\n";
         gp << "set title 'initial' \n";
         gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Initial data'\n";
-        gp.send1d(data);*/
+        gp.send1d(data);
         cout << "Xmin: " << xmin << " Xmax: " << xmax << endl;
         cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
     }
@@ -367,16 +367,16 @@ private:
     // loop the algorithm until centers don't change or the limit is hit
     void doClustering() {
         int i = 0; // counter for limit
-        //Gnuplot gp;
-        //gp << "set terminal postscript\n";
-        //gp << "set output \""<< file <<".eps\"\n";
+        Gnuplot gp;
+        gp << "set terminal postscript\n";
+        gp << "set output \""<< file <<".eps\"\n";
         while (i < limit && changed) {
             cout << "Iteration " << i+1 << endl;
             changed = recluster();
             cout << "Changed:" << changed << endl;
             i++;
-            //gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Iteration "<< i <<"'\n";
-            //gp.send1d(data);
+            gp << "plot ["<<xmin+1<<":"<<xmax+1<<"] ["<<ymin+1<<":"<<ymax+1<<"] '-' tit 'Iteration "<< i <<"'\n";
+            gp.send1d(data);
         }
         if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
         else cout << "K-means has not converged but clustering limit has been reached" << endl;
