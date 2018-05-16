@@ -429,6 +429,12 @@ public:
             changed = recluster();
             cout << "Changed:" << changed << endl;
             i++;
+            /*
+             gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette, '-' using 1:2:3 with points pointtype 7 pointsize 1 lc \"black\" title 'Iteration " << to_string(i)<< "'\n";
+            gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
+            gp.send2d(boost::make_tuple(x_ctrs, y_ctrs, z_ctrs));
+             */
+             
         }
         if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
         else cout << "K-means has not converged but clustering limit has been reached" << endl;
@@ -437,8 +443,7 @@ public:
         cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
         cout << "Average distance: " << map->avgdist << endl;
     }
-    
-    
+ 
     
     Map *map;
     
