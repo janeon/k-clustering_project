@@ -1,0 +1,9 @@
+Average distance for k=1 28.495662
+Average distance for k=2 8.671703
+Average distance for k=3 5.898991
+Average distance for k=4 4.439693
+Average distance for k=5 3.252060
+Average distance for k=6 2.783265
+Average distance for k=7 2.531916
+Average distance for k=8 2.173254
+Average distance for k=9 1.783923
