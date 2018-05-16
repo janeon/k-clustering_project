@@ -28,7 +28,8 @@ While k-means clustering can be used for a multitude of purposes, our intention 
 * Data (folder) - a collection of data files that we tested on.
 * Logs (folder) - output logs of important clustering runs.
 * Plots (folder) - images of plots of K-means clustering on different astronomical data.
-
+* Not included: postscript plots grow too large in size for GitHub and has been instead been moved to the Google Drive folder https://drive.google.com/drive/folders/17xYjGFwqIHbaeEuE5M2Bb-FxztzD2qDG?usp=sharing 
+Which is accessible by all Oberlin College accounts
 ## How to use this program:
 ### Cleaning Data
 After downloading unfiltered data from the [SIMBAD catalogue](http://simbad.u-strasbg.fr/simbad/sim-fid) in ASCII format, run the shell script clean_search.sh on it and pipe it to another file to filter out only the coordinates of galaxy objects:
