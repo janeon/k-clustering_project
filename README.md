@@ -52,7 +52,10 @@ The minute value is 1/60 of the hour, and the second value is 1/60 of the minute
 ```
 4 + 5*1/60 + 38*1/3600 hours
 ```
-I think this would be the best way, unless there's a better one?
+In the actual clustering, we further convert this to degrees through multiplying it by 360/24
+```
+(360/24) * (4 + 5*1/60 + 38*1/3600) degrees
+```
 
 The Dec is similar, but in degrees, arcminutes, and arcseconds. 60 arcmins in a degree, and 60 arcsecs in an arcmin.
 ```
