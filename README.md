@@ -83,4 +83,8 @@ The program will prompt for an input filename, and then the value of k to use. T
 
 Each coordinate in the input file is assigned to a Point object. In the beginning, the coordinates of k random Points are assigned as the initial centers around which to cluster. The program's main() method generates a KMeans object, which automatically runs the algorithm given k (the number of clusters), and the iteration limit (maximum number of times to re-determine clusters). To change the iteration limit, edit the first two lines of main() that initialize the variables. K-means will always converge with a k^n limit.
 
-Plotting is done with the gnuplot add-on, which outputs vector images in Postscript format and thus takes very long, and the time increases exponentially with n. Keep this in mind as larger data sets are used.
+To plot, run the command 
+``` 
+./cluster_plotting
+```
+And input the same filename and k value as in the prompt of clustering. Plotting uses the gnuplot and gnuplot-iostream add-ons, which outputs final vector images in Postscript format. With astronomical data sets, this takes very long, and the time increases exponentially with n, this is why only the final frame is plotted. Keep this in mind as larger data sets are used. 
