@@ -401,10 +401,10 @@ public:
         gp << "set terminal postscript\n";
         gp << "set output \""<< file <<".eps\"\n";
         gp << "set autoscale fix\n";
-        gp << "set xrange [184:190]\n";
-        gp << "set yrange [10:15]\n";
+//        gp << "set xrange [184:190]\n";
+//        gp << "set yrange [10:15]\n";
         gp << "set palette model RGB defined ( 0 'white', 1 'blue',2 \"red\", 3 \"orange\" )\n";
-        gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Final clusters'\n";
+//        gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Final clusters'\n";
         gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette, '-' using 1:2:3 with points pointtype 7 pointsize 1 lc \"black\" title 'Final clusters'\n";
         gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
         gp.send2d(boost::make_tuple(x_ctrs, y_ctrs, z_ctrs));
@@ -430,7 +430,8 @@ public:
             cout << "Changed:" << changed << endl;
             i++;
             /*
-             gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette, '-' using 1:2:3 with points pointtype 7 pointsize 1 lc \"black\" title 'Iteration " << to_string(i)<< "'\n";
+            gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Iteration " << to_string(i)<< "'\n";
+            gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette, '-' using 1:2:3 with points pointtype 7 pointsize 1 lc \"black\" title 'Final clusters'\n";
             gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
             gp.send2d(boost::make_tuple(x_ctrs, y_ctrs, z_ctrs));
              */
@@ -443,7 +444,8 @@ public:
         cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
         cout << "Average distance: " << map->avgdist << endl;
     }
- 
+    
+    
     
     Map *map;
     
