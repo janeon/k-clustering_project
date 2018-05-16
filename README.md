@@ -21,16 +21,22 @@ While iteration count and convergence have not been reached:
 While k-means clustering can be used for a multitude of purposes, our intention for this project is to determine clusters of stars and galaxies given their coordinates in the sky. Star and galaxy clustering are natural phenomena that has been investigated using numerous scientific tools and methods, but without astronomical instrumentation, means to measure any other physical quality of spacial objects, or years of knowledge in astronomy, k-means clustering is a computationally cheap, statistical way of obtaining this information to some degree of accuracy.
 
 ## Vital Files Included:
-* clean_search
+* clean_search.sh - a shell script to filter out the relevant galaxy data from an unfiltered [SIMBAD](http://simbad.u-strasbg.fr/simbad/sim-fid) search. 
+* convert.cpp - a C++ program to convert RA and Dec coordinates to x-y coordinates without scaling.
+* clustering.cpp - a C++ program that runs the [elbow method](https://en.wikipedia.org/wiki/Elbow_method_(clustering)) to determine an optimal k for a data set, runs K-means with a specified k value, and plots the clustering results.
+* Makefile - compiles and links convert.cpp and clustering.cpp. 
+* Data (folder) - a collection of data files that we tested on.
+* Logs (folder) - output logs of important clustering runs.
+* Plots (folder) - images of plots of K-means clustering on different astronomical data.
 
 ## How to use this program:
-#### Cleaning Data
+### Cleaning Data
 After downloading unfiltered data from the [SIMBAD catalogue](http://simbad.u-strasbg.fr/simbad/sim-fid) in ASCII format, run the shell script clean_search.sh on it and pipe it to another file to filter out only the coordinates of galaxy objects:
 ```
 bash clean_search.sh < filename > outfile
 ```
 
-#### Converting Coordinates
+### Converting Coordinates
 Using the file from the previous step, make and run convert and pipe it to another file to translate the RA and Dec coordinates to x-y coordinates:
 ```
 make
@@ -55,7 +61,7 @@ The Dec is similar, but in degrees, arcminutes, and arcseconds. 60 arcmins in a 
 A source for conversion: 
 http://www.skyandtelescope.com/astronomy-resources/what-are-celestial-coordinates/
 
-#### Using the Elbow Method to Determine an Optimal K Value
+### Using the Elbow Method to Determine an Optimal K Value
 Make and run clustering on the file with converted coordinates with the -e flag to run the Elbow method on a range of k values to determine the best one to use. 
 ```
 ./clustering -e
@@ -64,7 +70,7 @@ The program will ask for a file to run on, which will be the input filename.
 
 The range of k can be changed in the Elbow class of clustering.cpp. The elbow method outputs each k value with the resulting average distance between each point and its corresponding cluster center. For a strongly clustered data set, there should be an "elbow point" where the average distance stops decreasing greatly and starts plateauing. The elbow point is the optimal k value to use. For more evenly distributed data, the average distance will decrease exponentially, and a more intuitive k should be used after looking at the coordinate plots first.
 
-#### Running K-means Clustering and Plotting Results
+### Running K-means Clustering and Plotting Results
 After determining a suitable k value, run clustering normally without any flags:
 ```
 ./clustering
