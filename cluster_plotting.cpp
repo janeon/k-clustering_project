@@ -209,7 +209,9 @@ public:
     // for initiation - assign k random centers that are
     void randCenters(int k) {
         vector<Point*> centers; // store points that have already been selected
+        
         for (int i = 0; i < k; i++) {
+            
             srand(time(0)); // seed based on time for different randomness
             int r = rand() % allPoints.size(); // random int between 0 and size of all (0 included)
             Point *newcenter = allPoints.at(r); // get the selected item
@@ -223,6 +225,7 @@ public:
                 addCluster(newcenter); // make a new cluster with the center coordinates
             }
         }
+        
         // deallocate vector
         centers.clear();
         vector<Point*>().swap(centers);
@@ -246,8 +249,10 @@ public:
     
     // add in the beginning: add all points
     void initiate(int k) {
+        
         randCenters(k);
-        printcenters();
+        
+//        printcenters();
         sort();
     }
     
@@ -319,7 +324,8 @@ public:
              exit(1);
              }
              */
-            x = stof(tokens.at(tokens.size()-2));
+            
+            x = stof(tokens.at(tokens.size()-2)) * 360 / 24;
             y = stof(tokens.at(tokens.size()-1));
             // finding max and min values
             if (xmax < x) xmax = x; if (xmin > x) xmin = x;
@@ -335,29 +341,32 @@ public:
     }
     
     // initial clustering
-    void firstCluster(vector<vector<float> > x_pts,
-                      vector<vector<float> > y_pts,
-                      vector<vector<float> > z_pts) {
+    void firstCluster() {
+        
         map->initiate(k);
         
-        for (int i = 0; i < map->allPoints.size();i++) { // finding all points
-            x_pts[i][i] = map->allPoints.at(i)->getx();
-            y_pts[i][i] = map->allPoints.at(i)->gety();
-            z_pts[i][i] = map->allPoints.at(i)->clust->color;
-            cout << "Point x: " << x_pts[i][i] << endl;
-            cout << "Point y: " << y_pts[i][i] << endl;
-            cout << "Cluster numner: " << z_pts[i][i]<< endl;
-        }
-        Gnuplot gp;
-        gp << "set terminal postscript\n";
-        gp << "set output \""<< file <<".eps\"\n";
-        gp << "set autoscale fix\n";
-        gp << "set palette model RGB defined ( 0 'white', 1 'blue',2 \"red\", 3 \"orange\" )\n";
-        gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Initial clusters'\n";
-        gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
-//         */
-        cout << "Xmin: " << xmin << " Xmax: " << xmax << endl;
-        cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
+        /*
+         vector<vector<float> > x_pts,
+         vector<vector<float> > y_pts,
+         vector<vector<float> > z_pts
+         for (int i = 0; i < map->allPoints.size();i++) { // finding all points
+         x_pts[i][i] = map->allPoints.at(i)->getx();
+         y_pts[i][i] = map->allPoints.at(i)->gety();
+         z_pts[i][i] = map->allPoints.at(i)->clust->color;
+         cout << "Point x: " << x_pts[i][i] << endl;
+         cout << "Point y: " << y_pts[i][i] << endl;
+         cout << "Cluster numner: " << z_pts[i][i]<< endl;
+         }
+         Gnuplot gp;
+         gp << "set terminal postscript\n";
+         gp << "set output \""<< file <<".eps\"\n";
+         gp << "set autoscale fix\n";
+         gp << "set palette model RGB defined ( 0 'white', 1 'blue',2 \"red\", 3 \"orange\" )\n";
+         gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Initial data'\n";
+         gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
+         cout << "Xmin: " << xmin << " Xmax: " << xmax << endl;
+         cout << "Ymin: " << ymin << " Ymax: " << ymax << endl;
+         */
     }
     
     bool recluster() {
@@ -366,52 +375,61 @@ public:
         return map->recluster();
     }
     
-    void printClusters() {
-        /*
-        vector<vector<float> > x_pts,
-        vector<vector<float> > y_pts,
-        vector<vector<float> > z_pts
+    void printClusters(vector<vector<float> > x_pts,
+                       vector<vector<float> > y_pts,
+                       vector<vector<float> > z_pts,
+                       vector<vector<float> > x_ctrs,
+                       vector<vector<float> > y_ctrs,
+                       vector<vector<float> > z_ctrs) {
         for (int i = 0; i < map->allPoints.size();i++) { // finding all points
             x_pts[i][i] = map->allPoints.at(i)->getx();
             y_pts[i][i] = map->allPoints.at(i)->gety();
             z_pts[i][i] = map->allPoints.at(i)->clust->color;
             cout << "Point x: " << x_pts[i][i] << endl;
             cout << "Point y: " << y_pts[i][i] << endl;
+            
+        }
+        for (int i = 0; i < map->allClusters.size();i++) { // finding all points
+            x_ctrs[i][i] = map->allClusters.at(i)->centerx;
+            y_ctrs[i][i] = map->allClusters.at(i)->centery;
+            z_ctrs[i][i] = map->allClusters.at(i)->color;
+            cout << "Center x: " << x_ctrs[i][i] << endl;
+            cout << "Center y: " << y_ctrs[i][i] << endl;
             cout << "Cluster numner: " << z_pts[i][i]<< endl;
         }
         Gnuplot gp;
         gp << "set terminal postscript\n";
         gp << "set output \""<< file <<".eps\"\n";
         gp << "set autoscale fix\n";
+        gp << "set xrange [184:190]\n";
+        gp << "set yrange [10:15]\n";
         gp << "set palette model RGB defined ( 0 'white', 1 'blue',2 \"red\", 3 \"orange\" )\n";
         gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette title 'Final clusters'\n";
+        gp << "plot '-' using 1:2:3 with points pt 7 ps 1 lt palette, '-' using 1:2:3 with points pointtype 7 pointsize 1 lc \"black\" title 'Final clusters'\n";
         gp.send2d(boost::make_tuple(x_pts, y_pts, z_pts));
-         */
+        gp.send2d(boost::make_tuple(x_ctrs, y_ctrs, z_ctrs));
         ofstream outfile(to_string(k)+"-centered_"+file); // name original file is inserted
         if (outfile.is_open())  {
             for (const auto& c : map->allClusters) { // The center of each cluster starts with character c, and the coordinates  of the cluster
-                Cluster *clust = c;
-                outfile << "C:" << c->centerx << " " << c->centery << endl;
-                for (const auto&  point: c -> points) {
-                    outfile << point->getx() << " " << point->gety() <<  endl;
-                }
+                cout << "K = " << k << ", Iteration limit = " << limit << endl;
             }
-            outfile.close();
-            // for () // The points follow the line with the cluster center, with no prefixes
         }
-        else cout << "The file was not opened" << endl;
     }
-    
     // loop the algorithm until centers don't change or the limit is hit
     void doClustering() {
         int i = 0; // counter for limit
-        
+        /* Gnuplot gp;
+         gp << "set terminal postscript\n";
+         gp << "set output \""<< file <<".eps\"\n";
+         gp << "set autoscale fix\n";
+         gp << "set palette model RGB defined ( 0 'white', 1 'blue',2 \"red\", 3 \"orange\" )\n";
+         */
         while (i < limit && changed) {
             cout << "Iteration " << i+1 << endl;
             changed = recluster();
             cout << "Changed:" << changed << endl;
             i++;
-         }
+        }
         if (!changed) cout << "Clustering limit not reached but k-means converged" << endl;
         else cout << "K-means has not converged but clustering limit has been reached" << endl;
         cout << "Number of iterations: " << i << endl;
@@ -438,23 +456,30 @@ public:
         changed = true;
         
         cout << "K = " << k << ", Iteration limit = " << limit << endl;
+        size = populate();
+        vector<vector<float> > x_pts(size);
+        vector<vector<float> > y_pts(size);
+        vector<vector<float> > z_pts(size);
         
-        size = populate(); // add all the points
-        vector<vector<float> > x_pts;
-        vector<vector<float> > y_pts;
-        vector<vector<float> > z_pts;
-        x_pts.resize(size);
-        y_pts.resize(size);
-        z_pts.resize(size);
         for(int u = 0; u < size; u++) {
             x_pts[u].resize(size);
             y_pts[u].resize(size);
             z_pts[u].resize(size);
-
+            
         }
-        firstCluster(x_pts,y_pts,z_pts); // set random clusters and sort
+        vector<vector<float> > x_ctrs(k);
+        vector<vector<float> > y_ctrs(k);
+        vector<vector<float> > z_ctrs(k);
+        for(int u = 0; u < k; u++) {
+            x_ctrs[u].resize(k);
+            y_ctrs[u].resize(k);
+            z_ctrs[u].resize(k);
+            
+        }
+        
+        firstCluster(); // set random clusters and sort
         doClustering(); // do the algorithm
-//        printClusters(x_pts,y_pts,z_pts); // outputs the final clustering to an output file, which is named by the original file, prefixed by "k-centered_"
+        printClusters(x_pts,y_pts,z_pts,x_ctrs,y_ctrs,z_ctrs);; // outputs the final clustering to an output file, which is named by the original file, prefixed by "k-centered_"
     }
     
 };
@@ -496,7 +521,7 @@ public:
 int main(int argc, char* argv[]) {
     
     int k; // the number of clusters
-    int limit = 3; // the iteration limit
+    int limit = pow(4.0,9.0); // the iteration limit
     Map *map = new Map();
     // So k-means is supposed to converge in a finite number of steps
     // (at most k^n) but as a sanity check that our program doesn't loop infinitely we set the iteration limit to k^n
